@@ -1,0 +1,84 @@
+.mycontainer
+{
+    width: 90%;
+    margin: auto;
+}
+
+.program-header
+{
+    gap: 8px;
+}
+.program-header img 
+{
+    width: 32px;
+    height: 32px;
+}
+.program-header h4 
+{
+    color: var(--primary-blue, #1778C2);
+    text-align: right;
+    font-family: Cairo;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.program-content .program-info h5,.program-content .requirement h5,.program-content .program-duration h5
+{
+    color: var(--font-color, #212529);
+text-align: right;
+font-family: inherit;
+font-size: 24px;
+
+margin-top: 32px;
+font-weight: 500;
+
+}
+.program-content .program-info p 
+{
+    color: var(--font-color, #212529);
+text-align: right;
+font-family: Cairo;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+
+line-height: 30px;
+}
+
+.program-content .requirements,.program-content .program-fees,.program-content .program-duration
+{
+    margin-top: 25px;
+}
+// .program-content .requirement h5
+// {
+//     color: var(--font-color, #212529);
+// text-align: right;
+// font-family: Cairo;
+// font-size: 24px;
+// font-style: normal;
+// font-weight: 500;
+// line-height: normal;
+// }
+.program-content .requirements ul li, .program-content .program-fees ul li, .program-content .program-duration  ul li
+{
+    color: var(--font-color, #212529);
+    text-align: right;
+    font-family: Cairo;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.program-content .program-duration .register
+{
+    align-self: end;
+}
+.program-content .program-duration .register button
+{
+    border-radius: 10px;
+    background: var(--primary-blue, #1778C2);
+    padding: 10px 25px !important;
+    color: white;
+}

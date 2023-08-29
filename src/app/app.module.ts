@@ -16,6 +16,7 @@ import { ProgramListComponent } from './applicant/program-list/program-list.comp
 import { ProgramDetailsComponent } from './applicant/program-details/program-details.component';
 import { ProgramApplicationComponent } from './applicant/program-application/program-application.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

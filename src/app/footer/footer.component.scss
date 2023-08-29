@@ -1,0 +1,22 @@
+footer
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--primary-blue, #1778C2);
+   
+
+padding: 12px ;
+
+}
+footer p 
+{
+    color: var(--white, #FFF);
+    font-family: Roboto;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0px;
+}
