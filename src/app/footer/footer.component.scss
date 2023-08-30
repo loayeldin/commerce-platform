@@ -1,13 +1,11 @@
 footer
 {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 15px;
+ width: 100% !important;
     background: var(--primary-blue, #1778C2);
    
 
-padding: 12px ;
+padding: 10px ;
 
 }
 footer p 
@@ -19,4 +17,22 @@ footer p
     font-weight: 500;
     line-height: normal;
     margin: 0px;
+}
+@media (max-width: 480px)
+{
+        footer
+    {
+    
+    
+
+    padding: 6px ;
+
+    }
+    footer p 
+    {
+    
+        font-size: 13px;
+        font-style: normal;
+    
+    }
 }

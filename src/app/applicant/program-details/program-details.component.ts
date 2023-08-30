@@ -14,6 +14,10 @@ export class ProgramDetailsComponent {
     this.router.navigate(['applicant/program-application'])
   }
 
+  showApplicantsReq()
+  {
+    this.router.navigate(['employee/showStudents'])
+  }
 
 
 }

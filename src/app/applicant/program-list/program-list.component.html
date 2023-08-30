@@ -3,7 +3,7 @@
         <header class="d-flex justify-content-between align-items-center mt-5">
             <h4>برامج الدبلومات المتاحة حاليا</h4>
             <div class="search-bar">
-                <input type="text" class="" placeholder="بحث">
+                <input type="text" class="" placeholder="بحث" (keyup)="searchProgram($event.target)">
                 <img src="../../../assets/applicant/search.svg" alt="">
             </div>
         </header>

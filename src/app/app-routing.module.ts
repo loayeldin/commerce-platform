@@ -8,6 +8,9 @@ import { ProgramDetailsComponent } from './applicant/program-details/program-det
 import { ProgramApplicationComponent } from './applicant/program-application/program-application.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { ShowStudentsComponent } from './employee/show-students/show-students.component';
+import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -15,12 +18,24 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'myprofile',component:MyprofileComponent},
   {path:'signup',component:SignupComponent},
+
+
   {path:'applicant',component:ApplicantComponent,children:[
     {path:'',redirectTo:'program-list', pathMatch:'full'},
     {path:'program-list',component:ProgramListComponent},
     {path:'program-details',component:ProgramDetailsComponent},
     {path:'program-application',component:ProgramApplicationComponent},
   ]},
+
+  {path:'employee', component:EmployeeComponent,children:[
+    {path:'',redirectTo:'showStudents',pathMatch:'full'},
+    {path:'showStudents', component:ShowStudentsComponent},
+    { path:'student-data/:id', component:StudentReqDataComponent}
+
+ 
+
+
+  ]}
 
 ];
 

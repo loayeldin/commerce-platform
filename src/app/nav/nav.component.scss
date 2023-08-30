@@ -151,3 +151,98 @@ position: relative;
     top: 140% !important;
 }
 /* end user-info style */
+
+
+
+
+/* Media query for screens with max-width of 768px */
+@media (max-width: 768px) {
+    .universityLogo-container {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+    }
+
+    .universityLogo-container .universityLogo {
+        width: 30px;
+        height: 38px;
+    }
+
+    .logo-content h5 {
+        font-size: 18px;
+    }
+
+    .logo-content h6 {
+        font-size: 17px;
+    }
+
+    .nav-item .back-btn,
+    .nav-item .login-btn {
+        width: auto;
+        padding: 6px 10px;
+    }
+
+    .nav-item .back-btn i {
+        margin-right: 5px;
+    }
+
+    .user-info svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .user-info span {
+        font-size: 18px;
+    }
+
+    .dropdown-menu {
+        top: 120% !important;
+    }
+}
+
+
+
+/* Additional media queries for smaller screen sizes if needed */
+@media (max-width: 480px) {
+    .universityLogo-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .universityLogo-container .universityLogo {
+        width: 25px;
+        height: 32px;
+    }
+
+    .logo-content h5 {
+        font-size: 16px;
+    }
+
+    .logo-content h6 {
+        font-size: 15px;
+    }
+
+    .nav-item .back-btn,
+    .nav-item .login-btn {
+        width: auto;
+        padding: 5px 8px;
+    }
+
+    .nav-item .back-btn i {
+        font-size: 14px;
+        margin-right: 4px;
+    }
+
+    .user-info svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .user-info span {
+        font-size: 16px;
+    }
+
+    .dropdown-menu {
+        top: 110% !important;
+    }
+}

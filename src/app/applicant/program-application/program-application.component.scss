@@ -58,3 +58,41 @@ line-height: normal;
     font-weight: 600;
     line-height: normal;
 }
+
+
+@media screen and (max-width: 480px) {
+    .application {
+      width: 90%; /* Adjust the width for smaller screens */
+    }
+  }
+  
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    .application {
+      width: 80%; /* Adjust the width for medium-sized screens */
+    }
+  }
+
+@media screen and (max-width: 768px) {
+    .application {
+      width: 80%; /* Adjust the width for smaller screens */
+      padding: 20px; /* Add some padding to the form */
+      height: auto; /* Allow the height to adjust to content */
+    }
+  
+    .input-container {
+      width: 100%; /* Take up the full width on smaller screens */
+    }
+  }
+
+
+  @media screen and (min-width: 769px) and (max-width: 1200px) {
+    .application {
+      width: 60%; /* Adjust the width for larger screens */
+    }
+  }
+
+  @media screen and (min-width: 1201px) {
+    .application {
+      width: 40%; /* Default width for larger screens */
+    }
+  }

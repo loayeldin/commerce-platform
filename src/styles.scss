@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-    text-align: right;
-    font-family: "Arabic Font", sans-serif;
-}
+
 @import "~@fortawesome/fontawesome-free/css/all.css";
 :root
-{
+{body {
+    text-align: right;
+    font-family: "Arabic Font", sans-serif;
+    min-height: 100vh;
+}
     --primary-blue: #1778C2;
     --font-color:#212529;
 }

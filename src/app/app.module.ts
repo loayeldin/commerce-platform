@@ -17,6 +17,8 @@ import { ProgramDetailsComponent } from './applicant/program-details/program-det
 import { ProgramApplicationComponent } from './applicant/program-application/program-application.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShowStudentsComponent } from './employee/show-students/show-students.component';
+import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
 
 
 @NgModule({
@@ -35,6 +37,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProgramDetailsComponent,
     ProgramApplicationComponent,
     MyprofileComponent,
+    ShowStudentsComponent,
+    
+    StudentReqDataComponent,
 
    
   ],

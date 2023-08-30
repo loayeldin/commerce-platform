@@ -3,7 +3,10 @@
     width: 90%;
     margin: auto;
 }
-
+.program-details
+{
+    min-height: 100vh; /* to solve the hiden content under footer*/
+}
 .program-header
 {
     gap: 8px;
@@ -82,3 +85,89 @@ line-height: 30px;
     padding: 10px 25px !important;
     color: white;
 }
+
+@media (max-width: 480px) {
+
+    .program-header h4 {
+        font-size: 20px;
+    }
+
+    .program-content .program-info h5,
+    .program-content .requirements h5,
+    .program-content .program-fees h5,
+    .program-content .program-duration h5 {
+        font-size: 18px;
+    }
+
+    .program-content .program-info p,
+    .program-content .requirements ul li,
+    .program-content .program-fees ul li,
+    .program-content .program-duration ul li {
+        font-size: 14px;
+    }
+
+    .program-content .program-duration .register button {
+        padding: 6px 14px !important;
+    }
+   
+}
+@media (max-width: 767px) {
+    .program-header h4 {
+        font-size: 24px;
+    }
+
+    .program-content .program-info h5,
+    .program-content .requirements h5,
+    .program-content .program-fees h5,
+    .program-content .program-duration h5 {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    .program-content .program-info p,
+    .program-content .requirements ul li,
+    .program-content .program-fees ul li,
+    .program-content .program-duration ul li {
+        font-size: 14px;
+    }
+
+    .program-content .program-duration .register button {
+        padding: 6px 16px !important;
+    }
+
+
+
+}
+
+
+/* Media query for screens between 769px and 1200px */
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    .mycontainer {
+        width: 90%;
+        margin: auto;
+        padding: 0 16px;
+    }
+
+    .program-header h4 {
+        font-size: 32px;
+    }
+
+    .program-content .program-info h5,
+    .program-content .requirements h5,
+    .program-content .program-duration h5 {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    .program-content .program-info p,
+    .program-content .requirements ul li,
+    .program-content .program-fees ul li,
+    .program-content .program-duration ul li {
+        font-size: 16px;
+    }
+
+    .program-content .program-duration .register button {
+        padding: 8px 20px !important;
+    }
+}
+
