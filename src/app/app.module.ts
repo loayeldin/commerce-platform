@@ -16,9 +16,17 @@ import { ProgramListComponent } from './applicant/program-list/program-list.comp
 import { ProgramDetailsComponent } from './applicant/program-details/program-details.component';
 import { ProgramApplicationComponent } from './applicant/program-application/program-application.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowStudentsComponent } from './employee/show-students/show-students.component';
 import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
+import { HttpClientModule } from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
+import { MasterComponent } from './master/master.component';
+import { MasterHomeComponent } from './master/master-home/master-home.component';
+import { MasterAdminsComponent } from './master/master-admins/master-admins.component';
+import { MasterCollegeComponent } from './master/master-college/master-college.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+
 
 
 @NgModule({
@@ -40,15 +48,23 @@ import { StudentReqDataComponent } from './employee/student-req-data/student-req
     ShowStudentsComponent,
     
     StudentReqDataComponent,
+         MasterComponent,
+         MasterHomeComponent,
+         MasterAdminsComponent,
+         MasterCollegeComponent,
+         LoadingSpinnerComponent,
+     
 
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

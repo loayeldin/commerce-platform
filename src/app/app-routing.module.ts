@@ -12,6 +12,10 @@ import { EmployeeComponent } from './employee/employee.component';
 import { ShowStudentsComponent } from './employee/show-students/show-students.component';
 import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
 import { AdminComponent } from './admin/admin.component';
+import { MasterComponent } from './master/master.component';
+import { MasterHomeComponent } from './master/master-home/master-home.component';
+import { MasterCollegeComponent } from './master/master-college/master-college.component';
+import { MasterAdminsComponent } from './master/master-admins/master-admins.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -35,7 +39,18 @@ const routes: Routes = [
 
   ]},
 
-  {path:'admin', component:AdminComponent}
+  {path:'admin', component:AdminComponent},
+
+
+  {path:'master', component:MasterComponent,children:[
+    {path:'' ,redirectTo:'home',pathMatch:'full'},
+    {path:'home',component:MasterHomeComponent},
+    {path:'college',component:MasterCollegeComponent},
+    {path:'admins',component:MasterAdminsComponent}
+
+    
+
+  ]}
 
 ];
 

@@ -39,15 +39,15 @@
 
             <!-------------------  start login button ----------------->
       
-        <!-- <li class="nav-item " style="cursor: pointer;">
-            <a class="nav-link" href="">
+        <li class="nav-item " style="cursor: pointer;" *ngIf="!loggedIn">
+            <a class="nav-link" routerLink="/login">
               <button class="login-btn">
                   <span>الدخول</span>
                  
   
               </button>
             </a>
-          </li> -->
+          </li>
          
          <!-------------------  end login button ----------------->
 
@@ -57,8 +57,8 @@
            <!-------------------  start user-info ----------------->
 
  
-        <li class="nav-item ">
-          <a class="nav-link " href="#">
+        <li class="nav-item " *ngIf="loggedIn">
+          <a class="nav-link ">
            <div class=" d-flex justify-content-start">
                <div class="user-info">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
@@ -67,13 +67,13 @@
 
 
 
-                    <div class="dropdown">
-                      <span  data-toggle="dropdown" aria-expanded="true">اسم المستخدم</span>
+                    <div class="dropdown" >
+                      <span  data-toggle="dropdown" aria-expanded="true">{{userName}}</span>
                       <div class="dropdown-menu">
                         <a class="dropdown-item myProfile text-right" routerLink="/myprofile">معلومات الحساب</a>
                         
                         
-                        <button class="dropdown-item logout text-right mt-1" type="button">تسجيل الخروج</button>
+                        <button class="dropdown-item logout text-right mt-1" type="button"  (click)="logOut()">تسجيل الخروج</button>
                   
                       </div>
                     </div>

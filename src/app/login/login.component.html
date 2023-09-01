@@ -3,27 +3,43 @@
         <h4 class="mb-4">أنشئ حسابك</h4>
     
    
+       
 
-
-        <form class="d-flex align-items-center flex-column" >
+        <form class="d-flex align-items-center flex-column"  [formGroup]="login" (ngSubmit)="onSubmit()">
 
             <div class="input-container">
                
-                <select id="college" class="form-control">
-                  <option disabled selected >الدور</option>
-                  <option>الخريفي</option>
-                  <option>الربيع</option>
-                  <option>الصيفي</option>
+                <select id="college"
+                 class="form-control"
+                  formControlName="role"
+                  name="role" 
+                  required
+               
+                  >
+                  
+                  <option>admin</option>
+                  <option>master</option>
+                  <option>employee</option>
                 </select>
               </div>
               
 
             <div class="input-container">
-                <input type="email" class="form-control" placeholder="البريد الالكتروني">
+
+                <input type="email"
+                 class="form-control"
+                  placeholder="البريد الالكتروني"
+                   formControlName="email"
+                   name="email"
+                    required
+                    
+                    >
+            
+            
             </div>
 
             <div class="input-container">
-                <input type="password" class="form-control" placeholder="كلمة المرور">
+                <input type="password" class="form-control" placeholder="كلمة المرور" formControlName="password" required> 
             </div>
 
             <div class="input-container  d-flex justify-content-between"  style="margin-top: 0; color: #7F7C7E;">
@@ -38,7 +54,7 @@
             </div>
       
             <div class="input-container d-flex justify-content-center align-items-center pb-2 pt-2" >
-                <button class=" save mt-4" type="submit">دخول</button>
+                <button class=" save mt-4" type="submit" [disabled]="login.invalid">دخول</button>
             </div>
             <div class="d-flex justify-content-center align-items-center pt-3">
                 <span style="font-size: 14px;">ليس لديك حساب ؟<a routerLink="/signup">انشئ حساب جديد</a></span>
