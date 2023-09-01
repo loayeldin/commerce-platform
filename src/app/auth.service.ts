@@ -10,38 +10,59 @@ import { Router } from '@angular/router';
 export class AuthService {
   user = new BehaviorSubject<User>({} as User);
   loggedIn= new BehaviorSubject<boolean>(false);
+  
+
 
   constructor(private http:HttpClient ,private router:Router,private CookieService:CookieService) { }
 
 
-  login (form:any)
+  // login (form:any)
+  // {
+  //   return this.http.post('https://commerce-api-dev.onrender.com/api/v1/auth/login',form)
+  //   .subscribe(
+  //     data=>
+  //     {
+  //       console.log(data)
+  //       this.handleLogin(data)
+  //     },
+  //     err=>
+  //     {
+  //       console.log(err)
+  //     }
+  //   )
+  // }
+
+  login (form:any)  
   {
     return this.http.post('https://commerce-api-dev.onrender.com/api/v1/auth/login',form)
-    .subscribe(
-      data=>
-      {
-        console.log(data)
-        this.handleLogin(data)
-      },
-      err=>
-      {
-        console.log(err)
-      }
+    .pipe(
+      tap(resData=>{
+        console.log(resData)
+        this.handleLogin(resData)
+      })
     )
   }
 
   private handleLogin(resData:any)
   {
+    console.log(resData)
     let userId= resData.data.master.id
+
     let userToken=resData.data.tokens
+
     let userRole=resData.data.master.role
+
+
+
      const newUser = new User(userId,userToken,userRole)
       this.user.next(newUser)
+
+
       this.loggedIn.next(true)
 
      this.setCookies(userToken,userId,userRole)
      console.log(this.user.value)
-    
+ 
       this.loggedIn.next(true)
       this.getCookies()
      if(userRole == 'master')

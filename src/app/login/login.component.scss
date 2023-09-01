@@ -7,9 +7,10 @@
 }
 
 .application{
-    height: 490px;
+    min-height: 490px;
     width: 35%;
     background: #FFF;
+    padding-bottom: 20px;
 
     box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.25);
 }
@@ -23,6 +24,13 @@ width: 75%;
 height: 50px;
 padding: 10px 16px;
 cursor: pointer;
+
+}
+
+.alert
+{
+  width: 95% !important;
+  text-align: right;
 
 }
 

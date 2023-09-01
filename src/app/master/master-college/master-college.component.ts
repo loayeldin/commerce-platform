@@ -58,7 +58,7 @@ export class MasterCollegeComponent {
 
 
 
-      addCollegee(value:any)
+    addCollegee(value:any)
     {
       
       
