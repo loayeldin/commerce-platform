@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
 export class HomePageComponent {
 
   image : string = "assets/Home/image2.png"
+  image1 : string = "assets/Home/logo.png"
+
+  
 }

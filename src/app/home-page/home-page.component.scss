@@ -63,6 +63,18 @@
     font-size: 24px;
     font-weight: 500;
 }
+.logo-circle{
+    background: white;
+    width: 250.7px;
+    height: 250.7px;
+    border-radius: 50%;
+    box-shadow: 4px 4px 24px 0px rgba(43, 85, 148, 0.25);
+}
+
+.logo-circle img{
+    width: 150.7px;
+    height: 150.7px;
+}
 @keyframes animate {
     0%{
         transform: translateY(-50px);
