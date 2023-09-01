@@ -1,3 +1,8 @@
+.students-list
+{
+  // min-height: 100vh; /*  to solve the hiden content under footer*/
+
+}
 .mycontainer
 {
     width: 90%;
@@ -60,10 +65,15 @@ height: 32px;
 {
 
 }
-
-.table
+.table-container
 {
     width: 80%;
+ 
+}
+.table
+{
+    width: 100%;
+    background-color: blue;
 }
 .table-header
 {
@@ -85,13 +95,142 @@ line-height: normal;
 }
 
 
+tr
+{
+    cursor: pointer;
+}
 
 table td 
 {
+ 
   max-width: 250px;
   border-top: 1.094px solid var(--font-color, #212529);
 border-bottom: 1.094px solid var(--font-color, #212529);
 border-left: 1.094px solid var(--font-color, #212529);
 background: var(--background, #F2F2F2);
 padding: 10.937px;
+transition: .4s all;
+
 }
+tbody tr:hover td
+{
+    
+  background-color: white;
+}
+/* Styles for screen sizes up to 768px */
+@media (max-width: 768px) {
+    .mycontainer {
+      width: 98%; /* Adjust the container width for smaller screens */
+    }
+  
+    header h4 {
+      font-size: 28px; /* Decrease the font size for smaller screens */
+    }
+  
+    .search-bar {
+        width: 100%;
+        max-width: 250px;
+        margin-top: 16px;
+    }
+    .search-bar input {
+      font-size: 14px; /* Decrease the font size for smaller screens */
+    }
+
+      /* Adjust table styles for better readability on small screens */
+      .table td {
+        padding: 8px;
+      }
+     .table-container
+     {
+      overflow-x: auto;
+     }
+     .table-container
+        {
+            width: 100%;
+        
+        }
+      .table
+      {
+          min-width: 700px; /* Set a minimum width for the table */
+  
+      }
+  
+      .table-header
+      {
+     
+  
+      font-size: 18px;
+     
+      }
+  
+  
+  
+      table td 
+      {
+      max-width: auto;
+  
+      padding: 8.937px;
+      font-size: 12px !important;
+      }
+  }
+  
+
+
+  /* Styles for screen sizes up to 480px */
+@media (max-width: 480px) {
+    .mycontainer {
+      width: 99%; /* Adjust the container width for smaller screens */
+    }
+    header
+    {
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+    header h4 {
+      font-size: 24px; /* Decrease the font size for smaller screens */
+    }
+  
+    .search-bar {
+      width: 100%; /* Make the search bar full width for smaller screens */
+      margin-top: 10px; /* Add some spacing */
+    }
+  
+    .search-bar input {
+      font-size: 12px; /* Decrease the font size for smaller screens */
+    }
+    
+    /* Adjust table styles for better readability on small screens */
+    .table td {
+      padding: 8px;
+    }
+   .table-container
+   {
+    overflow-x: auto;
+   }
+    .table
+    {
+        min-width: 500px; /* Set a minimum width for the table */
+
+    }
+
+    .table-header
+    {
+   
+
+    font-size: 18px;
+   
+    }
+
+
+
+    table td 
+    {
+    max-width: auto;
+
+    padding: 8.937px;
+    font-size: 12px !important;
+    }
+  }
+
+
+  

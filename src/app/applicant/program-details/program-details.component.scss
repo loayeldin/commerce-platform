@@ -5,7 +5,7 @@
 }
 .program-details
 {
-    min-height: 100vh; /* to solve the hiden content under footer*/
+    // min-height: 100vh; /* to solve the hiden content under footer*/
 }
 .program-header
 {
@@ -54,16 +54,7 @@ line-height: 30px;
 {
     margin-top: 25px;
 }
-// .program-content .requirement h5
-// {
-//     color: var(--font-color, #212529);
-// text-align: right;
-// font-family: Cairo;
-// font-size: 24px;
-// font-style: normal;
-// font-weight: 500;
-// line-height: normal;
-// }
+
 .program-content .requirements ul li, .program-content .program-fees ul li, .program-content .program-duration  ul li
 {
     color: var(--font-color, #212529);

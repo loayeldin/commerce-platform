@@ -11,6 +11,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { ShowStudentsComponent } from './employee/show-students/show-students.component';
 import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -30,12 +31,11 @@ const routes: Routes = [
   {path:'employee', component:EmployeeComponent,children:[
     {path:'',redirectTo:'showStudents',pathMatch:'full'},
     {path:'showStudents', component:ShowStudentsComponent},
-    { path:'student-data/:id', component:StudentReqDataComponent}
+    { path:'showStudents/:id', component:StudentReqDataComponent}
 
- 
+  ]},
 
-
-  ]}
+  {path:'admin', component:AdminComponent}
 
 ];
 
