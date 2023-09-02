@@ -11,43 +11,40 @@
 
           
 
-            <!-- <div class="input-container">
-                <input type="text" class="form-control" placeholder="اسم المستخدم">
-            </div> -->
-
-            <div class="input-container">
-                <input type="text" class="form-control" [value]="profileData.data.master.name" disabled>
+            <!-- profile master data-->
+            <div class="input-container" *ngIf="profileMasterData">
+                <input type="text" class="form-control" [value]="profileMasterData.data.master.name" disabled>
             </div>
 
 
             
-            <div class="input-container mt-4">
-                <input type="email" class="form-control" [value]="profileData.data.master.email" disabled>
+            <div class="input-container mt-4" *ngIf="profileMasterData">
+                <input type="email" class="form-control" [value]="profileMasterData.data.master.email" disabled>
             </div>
 
-            <!-- <div class="input-container  mt-4">
-                <input type="number" class="form-control" placeholder="ارقم القومي">
+     
+            <!-- profile master data-->
+
+
+
+            
+            <!-- profile admin data-->
+
+
+            <div class="input-container" *ngIf="profileAdminData">
+                <input type="text" class="form-control" [value]="profileAdminData.data.adminData.name" disabled>
             </div>
 
 
-            <div class="input-container">
-               
-                <select id="college" class="form-control">
-                  <option selected>تجاره</option>
-                  <option>اداب </option>
-                </select>
-              </div>
-
-
-            <div class="input-container">
-                <input type="password" class="form-control" placeholder="كلمه المرور">
+            
+            <div class="input-container mt-4" *ngIf="profileAdminData">
+                <input type="email" class="form-control" [value]="profileAdminData.data.adminData.email" disabled>
             </div>
 
-            <div class="input-container">
-                <input type="password" class="form-control" placeholder="تاكيد كلمه المرور">
-            </div>
-        
-         -->
+
+
+            
+            <!-- profile admin data-->
       
             <div class="input-container d-flex justify-content-between align-items-center p-5">
                 <button class=" delete-acc mt-4" type="button" disabled>حذف الحساب</button>

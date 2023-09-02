@@ -8,11 +8,14 @@
             <app-loading-spinner></app-loading-spinner>
         </div>
     
-   
-       
+        
 
         <form class="d-flex align-items-center flex-column"  [formGroup]="login" (ngSubmit)="onSubmit()" >
 
+            <div class="alert alert-danger mt-1" role="alert" *ngIf="generalErr">
+                {{generalErr}}
+              </div>
+       
             <div class="input-container">
                
                 <select id="college"
@@ -29,9 +32,9 @@
                 </select>
               </div>
 
-              <div class="alert alert-danger mt-1" role="alert" *ngIf="roleErr">
+              <!-- <div class="alert alert-danger mt-1" role="alert" *ngIf="roleErr">
                 {{roleErr}}
-              </div>
+              </div> -->
               
 
             <div class="input-container">
@@ -47,23 +50,22 @@
             
             
             </div>
-
+<!-- 
             <div class="alert alert-danger mt-1" role="alert" *ngIf="emailErr">
                 {{emailErr}}
-              </div>
+              </div> -->
 
             <div class="input-container">
                 <input type="password" class="form-control" placeholder="كلمة المرور" formControlName="password" required> 
             </div>
 
-            <div class="alert alert-danger mt-1" role="alert" *ngIf="passErr">
+            <!-- <div class="alert alert-danger mt-1" role="alert" *ngIf="passErr" style="width: 67%;">
                 {{passErr}}
-              </div>
+              </div> -->
 
             <div class="input-container  d-flex justify-content-between"  style="margin-top: 0; color: #7F7C7E;">
                 <div class="d-flex align-items-center ">
-                <!-- <label class="pl-2" for="vehicle1"> ذكرني</label>
-                <input type="checkbox" id="remember" name="remember" value="remember"> -->
+              
                 </div>
                 <div>
                     <a href="">نسيت كلمة المرور؟</a>

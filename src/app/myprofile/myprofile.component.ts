@@ -11,8 +11,10 @@ export class MyprofileComponent {
 
   constructor(private authService:AuthService, private http:HttpClient){}
    token = this.authService.user.value.token 
+   userRole= this.authService.user.value.role
 profileLoaded=false
-  profileData!:any
+profileMasterData!:any
+profileAdminData!:any
 
   
    ngOnInit()
@@ -26,11 +28,22 @@ profileLoaded=false
       'Authorization': `Bearer ${this.token}`
     })
     
-    return this.http.get('https://commerce-api-dev.onrender.com/api/v1/master/me',{headers}).subscribe(data=>
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/${this.userRole}/me`,{headers}).subscribe(data=>
     {
       console.log(data)
-      this.profileData = data
+     if(this.userRole == 'master')
+     {
+
+      this.profileAdminData =undefined
+      this.profileMasterData = data
       this.profileLoaded=true
+     }else if (this.userRole =='admin')
+     {
+      this.profileAdminData = data
+      this.profileMasterData = undefined
+      this.profileLoaded=true
+     }
+     
     },
     err=>
     {

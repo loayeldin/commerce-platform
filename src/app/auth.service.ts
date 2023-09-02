@@ -64,10 +64,13 @@ export class AuthService {
      console.log(this.user.value)
  
       this.loggedIn.next(true)
-      this.getCookies()
+      // this.getCookies()
      if(userRole == 'master')
      {
       this.router.navigate(['/master'])
+     }else if(userRole == 'admin')
+     {
+      this.router.navigate(['/admin'])
      }
 
       
@@ -104,6 +107,7 @@ export class AuthService {
     else
     {
       console.log('no')
+      this.router.navigate(['/login'])
     }
   
 

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MasterService } from '../master.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 declare var $:any
 @Component({
   selector: 'app-master-college',
@@ -11,12 +12,14 @@ declare var $:any
 })
 export class MasterCollegeComponent {
 
-  constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService){}
+  constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   removeCollegeIndex = -1
   updateCollegeData!:any
+  collegeUpdateIndex!:any
   token =this.authService.user.value.token
   collegesLoad = false
   colleges!:any
+  err!:any
   collegeForm= new FormGroup(
     {
       name: new FormControl('',[Validators.required]),
@@ -82,6 +85,7 @@ export class MasterCollegeComponent {
 
     showColleges()
     {
+      
       const headers= new HttpHeaders({
         'Authorization': `Bearer ${this.token}`
       })
@@ -90,10 +94,13 @@ export class MasterCollegeComponent {
         this.colleges = data
       
       this.collegesLoad=true
+      this.err = undefined
       },
       err=>
       {
-        console.log(err)
+        this.err = err.error.message
+        this.collegesLoad=true
+        
       })
       
     }
@@ -124,16 +131,35 @@ export class MasterCollegeComponent {
     }
 
 
-    getUpdateIndex(index:number)
-    {
-      this.updateCollegeData = this.colleges.data.collages[index];
-      console.log(this.updateCollegeData)
-      this.collegeForm.patchValue({
-        name: this.updateCollegeData.name,
-        universityName:this.updateCollegeData.university_name
+    // getUpdateIndex(index:number)
+    // {
+    //   this.updateCollegeData = this.colleges.data.collages[index];
+    //   console.log(this.updateCollegeData)
+    //   this.collegeForm.patchValue({
+    //     name: this.updateCollegeData.name,
+    //     universityName:this.updateCollegeData.university_name
 
-     });
+    //  });
+    // }
+
+
+
+    onCollegeSelectionChange(selectedIndex:any)
+    {
+      console.log('Selected College Index:', selectedIndex);
+
+      // If you want to access the selected college's name:
+      this.updateCollegeData = this.colleges.data.collages[selectedIndex];
+    console.log('Selected College Name:',this.updateCollegeData);
+
+      this.collegeForm.patchValue({
+            name: this.updateCollegeData.name,
+            universityName:this.updateCollegeData.university_name
+    
+         });
     }
+
+
 
     updateCollege()
     {
@@ -153,6 +179,13 @@ export class MasterCollegeComponent {
         console.log(err)
       })
     }
-    
+
+
+    // when click on home icon let him go back to parent component
+    navigateToParentComponent()
+    {
+      this.router.navigate(['../'], { relativeTo: this.route });
+
+    }
 
   }

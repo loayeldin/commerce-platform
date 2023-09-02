@@ -16,6 +16,9 @@ import { MasterComponent } from './master/master.component';
 import { MasterHomeComponent } from './master/master-home/master-home.component';
 import { MasterCollegeComponent } from './master/master-college/master-college.component';
 import { MasterAdminsComponent } from './master/master-admins/master-admins.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
+import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -39,7 +42,12 @@ const routes: Routes = [
 
   ]},
 
-  {path:'admin', component:AdminComponent},
+  {path:'admin', component:AdminComponent,children:[
+    {path:'' ,redirectTo:'home',pathMatch:'full'},
+    {path:'home',component:AdminHomeComponent},
+    {path:'programs',component:AdminProgramComponent},
+    {path:'employee',component:AdminEmployeeComponent}
+  ]},
 
 
   {path:'master', component:MasterComponent,children:[

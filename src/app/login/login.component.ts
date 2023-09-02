@@ -10,6 +10,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
 emailErr!:any
 passErr!:any
+generalErr!:any
 roleErr!:any
   constructor(private authService:AuthService){}
   isLoading=true
@@ -35,28 +36,29 @@ roleErr!:any
         },
         err=>
         {
-         if( err.error.message == 'Invalid email.')
-         {
-          this.emailErr = 'خطأ في البريد الإلكتروني'
-          this.passErr=undefined
-          this.roleErr=undefined
+        //  if( err.error.message == 'Invalid email.')
+        //  {
+        //   this.emailErr = 'خطأ في البريد الإلكتروني'
+        //   this.passErr=undefined
+        //   this.roleErr=undefined
           
-          this.isLoading=true
-         }else if(err.error.message == 'Could not authenticate master.')
-        {
-          this.passErr =  'خطأ في كلمه المرور '
-          this.emailErr=undefined
-          this.roleErr=undefined
+        //   this.isLoading=true
+        //  }else if(err.error.message == 'Could not authenticate master.')
+        // {
+        //   this.passErr =  'خطأ في كلمه المرور '
+        //   this.emailErr=undefined
+        //   this.roleErr=undefined
 
-          this.isLoading=true
-        }else
-        {
-          this.roleErr = 'خطأ'
-          this.isLoading=true
-          this.emailErr=undefined
-          this.passErr=undefined
-        }
-          console.log(err.error)
+        //   this.isLoading=true
+        // }else
+        // {
+        //   this.roleErr = 'خطأ'
+        //   this.isLoading=true
+        //   this.emailErr=undefined
+        //   this.passErr=undefined
+        // }
+         this.generalErr = 'خطأ في الدخول'
+            this.isLoading=true
         })
    
     }

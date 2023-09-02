@@ -26,6 +26,9 @@ import { MasterHomeComponent } from './master/master-home/master-home.component'
 import { MasterAdminsComponent } from './master/master-admins/master-admins.component';
 import { MasterCollegeComponent } from './master/master-college/master-college.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
+import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
 
 
 
@@ -53,6 +56,9 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
          MasterAdminsComponent,
          MasterCollegeComponent,
          LoadingSpinnerComponent,
+         AdminHomeComponent,
+         AdminProgramComponent,
+         AdminEmployeeComponent,
      
 
    
