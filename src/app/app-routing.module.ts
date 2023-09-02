@@ -19,6 +19,7 @@ import { MasterAdminsComponent } from './master/master-admins/master-admins.comp
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
 import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
+import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
@@ -46,6 +47,7 @@ const routes: Routes = [
     {path:'' ,redirectTo:'home',pathMatch:'full'},
     {path:'home',component:AdminHomeComponent},
     {path:'programs',component:AdminProgramComponent},
+    {path:'programs/:id',component:AdminProgramDetailsComponent},
     {path:'employee',component:AdminEmployeeComponent}
   ]},
 

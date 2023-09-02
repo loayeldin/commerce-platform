@@ -99,6 +99,20 @@
     transition: .7s all;
 
 }
+.read-more
+{
+    padding: 6px;
+    width: 103px;
+    height: 37px;
+    border-radius: 10px;
+    font-family: Cairo;
+    transition: 0.7s all;
+    font-size: 16px;
+    border: none;
+    background-color: var(--Primary-Blue, #1778C2) !important;
+    color: white;
+    margin-top: 10px;
+}
 .add-btn
 {
     background: var(--Primary-Blue, #1778C2);
@@ -112,6 +126,17 @@
     border: 1px solid var(--Red, #CD5858);
     color: var(--Red, #CD5858);
     background-color: transparent;
+}
+
+.choose
+{
+    color: var(--DarkBlue, #001D4B);
+    text-align: right;
+    font-family: Cairo;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 // .modal-lg
 // {
