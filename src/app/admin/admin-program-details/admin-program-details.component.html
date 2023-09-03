@@ -106,7 +106,7 @@
 
 
 <!-- start add file modal-->
- <div *ngIf="!isLoading || programFiles " class="modal fade" id="addFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div *ngIf="!isLoading " class="modal fade" id="addFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -146,7 +146,7 @@
           
                 <div class="form-group mt-3">
                     <header class="col-lg-3  "> نوع الملف  </header>
-                    <select class="form-control mt-2" id="exampleFormControlSelect1" formControlName="type">
+                    <select class="form-control mt-2" id="exampleFormControlSelect1" formControlName="type" #addFileSelect>
                       <option value="image/jpeg">jpeg/jpg</option>
                       <option value="application/pdf"> PDF</option>
                       <option value="image/png">png</option>
@@ -225,7 +225,7 @@
           
                 <div class="form-group mt-3">
                     <header class="col-lg-3  "> اختار الملف </header>
-                    <select class="form-control mt-2" id="exampleFormControlSelect1"  [(ngModel)]="removeFileIndex" required name="removeFileIndex">
+                    <select class="form-control mt-2" id="exampleFormControlSelect1"  [(ngModel)]="removeFileIndex" required name="removeFileIndex" #deleteFileSelect>
                       <option  *ngFor="let file of this.programFiles.data.programFiles ; let i = index " [value]="i">{{file.name}}</option>
                 
                     </select>

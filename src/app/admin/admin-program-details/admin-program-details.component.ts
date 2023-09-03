@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,6 +24,7 @@ export class AdminProgramDetailsComponent {
   token = this.authService.user.value.token
   removeFileIndex =-1
 
+  @ViewChild('deleteFileSelect') deleteFileSelect!: ElementRef;
 
   addFile= new FormGroup({
     'name' : new FormControl('',[Validators.required]),
@@ -41,12 +42,16 @@ export class AdminProgramDetailsComponent {
     
   }
 
+
+
   ngAfterViewInit() {
     
-    // to reset form when use close update modal
-    $('#addFile').on('hidden.bs.modal',  (e: any) => {
+   setTimeout(() => {
+     // to reset form when use close update modal
+     $('#addFile').on('hidden.bs.modal',  (e: any) => {
       // do something...
       this.addFile.reset();
+
 
    
     
@@ -55,11 +60,15 @@ export class AdminProgramDetailsComponent {
 
     $('#deleteFile').on('hidden.bs.modal',  (e: any) => {
       // do something...
-      this.removeFileIndex = -1
-
-   
+      // this.removeFileIndex = -1
+      this.deleteFileSelect.nativeElement.value = null
     
     })
+   }, 3000);
+  
+    
+
+
   }
 
   showProgramDetails()

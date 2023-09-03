@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
@@ -38,27 +38,91 @@ export class AdminProgramComponent {
   updateProgramId!:any
   token = this.authService.user.value.token
   removeProgramIndex = -1
+  
+
+
+
+  @ViewChild('editProgramSelect') editProgramSelect!: ElementRef;
+  @ViewChild('removeProgramSelect') removeProgramSelect!: ElementRef;
+  
+  // ngAfterViewInit() {
+    
+  //   if(this.programsData !=undefined)
+  //   {
+  //     setTimeout(() => {
+  //       $('#addDiploma').on('hidden.bs.modal', () => {
+  //           this.addDiploma.reset();
+  //           this.editProgramSelect.nativeElement.value = null;
+  
+  //           // Reset the <select> element to its initial value
+  //       });
+  
+  //       $('#updateDiploma').on('hidden.bs.modal', () => {
+  //           this.addDiploma.reset();
+         
+  //           // Reset the <select> element to its initial value
+  //           this.editProgramSelect.nativeElement.value = null;
+  //       });
+  
+  
+  //       $('#deleteProgram').on('hidden.bs.modal', () => {
+  //         this.addDiploma.reset();
+       
+  //         // Reset the <select> element to its initial value
+  //         this.removeProgramSelect.nativeElement.value = null;
+  //     });
+  //   }, 1000); // Delay for 1 second
+  
+  //   }
+
+  // }
+
+
+  ngAfterContentChecked()
+  {
+    if(this.programsData !=undefined)
+    {
+      setTimeout(() => {
+        $('#addDiploma').on('hidden.bs.modal', () => {
+            this.addDiploma.reset();
+            // this.editProgramSelect.nativeElement.value = null;
+  
+            // Reset the <select> element to its initial value
+        });
+  
+        $('#updateDiploma').on('hidden.bs.modal', () => {
+            this.addDiploma.reset();
+         
+            // Reset the <select> element to its initial value
+            this.editProgramSelect.nativeElement.value = null;
+        });
+  
+  
+        $('#deleteProgram').on('hidden.bs.modal', () => {
+          this.addDiploma.reset();
+       
+          // Reset the <select> element to its initial value
+          this.removeProgramSelect.nativeElement.value = null;
+      });
+    }, 1000); // Delay for 1 second
+  
+    }
+  }
+
+
+
   ngOnInit()
   {
     // this.getCollegeId()
   
-   console.log( this.collegeId = this.CookieService.get('collegeId'))
+    this.collegeId = this.CookieService.get('collegeId')
     this.showPrograms()
+    console.log(this.programUpdateIndex)
   }
 
 
 
-  ngAfterViewInit() {
-    
-    // to reset form when use close update modal
-    $('#updateDiploma').on('hidden.bs.modal',  (e: any) => {
-      // do something...
-      this.addDiploma.reset();
 
-   
-    
-    })
-  }
 
 // start display all programs//
 //  getCollegeId()
@@ -102,7 +166,10 @@ export class AdminProgramComponent {
     },
     err=>
     {
+      this.addDiploma.reset()
+      this.programsData = undefined
       console.log(err)
+    
     })
   }
 
@@ -146,7 +213,7 @@ export class AdminProgramComponent {
   onCollegeSelectionChange(selectedIndex:any)
   {
 
-    console.log(this.programUpdateIndex)
+    console.log(selectedIndex,this.programUpdateIndex)
     
     this.updateProgramData = this.programsData.data.programs[selectedIndex];
     this.updateProgramId = this.programsData.data.programs[selectedIndex].id
@@ -178,6 +245,8 @@ export class AdminProgramComponent {
 
   
        });
+
+
   }
 
 
@@ -197,7 +266,9 @@ export class AdminProgramComponent {
       {
         console.log(data)
        this.showPrograms()
-        $('#updateDiploma').modal('hide')
+      
+        this.editProgramSelect.nativeElement.value = null;
+       
       
       },
       err=>

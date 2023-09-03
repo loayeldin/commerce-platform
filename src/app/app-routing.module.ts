@@ -19,13 +19,12 @@ import { MasterAdminsComponent } from './master/master-admins/master-admins.comp
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
 import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
-<<<<<<< HEAD
 import { CreateAdminsComponent } from './master/master-admins/create-admins/create-admins.component';
 import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
 
-=======
-import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
->>>>>>> 4e5b929bd2865e624ba1bab7aca1bc47b5a601a5
+
+// import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
+
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
