@@ -20,7 +20,7 @@ export class MasterAdminsComponent implements OnInit{
   }
   clickHere(index:any){
     const id= this.colleges.data.collages[index].id
-    
+    console.log(id);
     
     this.router.navigate(['/master/admins',id])
   }
@@ -31,6 +31,9 @@ export class MasterAdminsComponent implements OnInit{
     })
 
     return this.http.get('https://commerce-api-dev.onrender.com/api/v1/master/collages/', {headers}).subscribe(data=>{
+
+ 
+    
       this.colleges = data
       this.collegesLoad = true
       this.err = undefined

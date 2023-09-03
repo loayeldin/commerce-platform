@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MasterService } from '../../master.service';
 import { AuthService } from 'src/app/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,12 +14,14 @@ declare var $:any
 export class CreateAdminsComponent {
   removeAdmin = -1
   editAdmin!:any
+  UpdateAdmin!:any
   collageId!:any
   token =this.authService.user.value.token
   adminsLoad = false
   colleges!:any
   admiins!:any
   err!:any
+  
   adminForm= new FormGroup(
     {
       name: new FormControl('',[Validators.required]),
@@ -27,11 +29,19 @@ export class CreateAdminsComponent {
       password: new FormControl('',Validators.required),
       // universityName: new FormControl('',[Validators.required])
     })
+    @ViewChild('updateCollegeModal') updateCollegeModal!: ElementRef ;
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   ngOnInit(): void {
     this.showAdmin()
   }
-
+  ngAfterViewInit() {
+    
+    // to reset form when use close update modal
+    $('#updateAdmin').on('hidden.bs.modal',  (e: any) => {
+      // do something...
+      this.adminForm.reset();
+    })
+  }
   CLICK(index:any){
     const CollegeId = this.colleges.data[index].id;
     console.log(CollegeId);
@@ -104,15 +114,39 @@ export class CreateAdminsComponent {
     })
 
   }
+
  
   onAdminsSelectionChange(selectedIndex:any){
     console.log(selectedIndex);
     
     this.editAdmin = this.admiins.data.admins[selectedIndex]
+
+    this.adminForm.patchValue({
+      name: this.editAdmin.name,
+      email:this.editAdmin.email,
+      password: this.editAdmin.password
+
+   });
   }
+ 
   updateAdmins(){
-    
+    const headers= new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+    this.collageId = this.route.snapshot.paramMap.get('id')
+
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,this.adminForm.value,{headers}).subscribe(data=>
+    {
+      console.log(data)
+      this.showAdmin()
+      $('#updateAdmin').modal('hide')
+    },
+    err=>
+    {
+      console.log(err)
+    })
   }
+
   navigateToParentComponent()
   {
     this.router.navigate(['../'], { relativeTo: this.route });

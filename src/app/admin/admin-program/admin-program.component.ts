@@ -91,7 +91,9 @@ export class AdminProgramComponent {
       'Authorization': `Bearer ${this.token}`
     })
     
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/programs`,{headers}).subscribe(data=>
+    
+    
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/programs/`,{headers}).subscribe(data=>
     {
      
       this.programsData = data

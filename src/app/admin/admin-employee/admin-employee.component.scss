@@ -1,0 +1,52 @@
+.reactangle-icon-shape
+{
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.home
+{
+    background: #1A5CAA;
+}
+.add
+{
+    background: #1778c2;
+}
+.delete
+{
+    background: var(--Red, #CD5858);
+}
+.rectangle-employee-shape
+{
+    background: var(--White, #FFF);
+    padding: 30px;
+    text-align: center;
+    min-height: 185px;
+    cursor: pointer;
+    /* PDF Style */
+    box-shadow: 0px 3.27652px 26.21217px 0px rgba(0, 0, 0, 0.25);
+}
+.rectangle-employee-shape h5
+{
+        color: var(--Primary-Blue, #1778C2);
+   
+  
+    font-size: 32px;
+  
+    font-weight: 600;
+  
+}
+.rectangle-employee-shape h6
+{
+    color: var(--Primary-Blue, #1778C2);
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+}
