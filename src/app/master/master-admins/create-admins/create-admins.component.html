@@ -248,7 +248,7 @@
 
 
   <!-- update college Modal -->
-  <!-- <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -263,15 +263,15 @@
 
         <div class="modal-body p-5">
 
-          <div class="input-container" *ngIf="collegesLoad">
+          <div class="input-container" *ngIf="adminsLoad">
                
             <select id="college"
                 class="form-control"
             
               name="collegeToUpdate" 
               required
-              [(ngModel)]="collegeUpdateIndex"
-              (ngModelChange)="onCollegeSelectionChange($event)"
+              [(ngModel)]="editAdmin"
+              (ngModelChange)="onAdminsSelectionChange($event)"
               >
               
               <option   *ngFor="let colleges of colleges.data.collages ; let i = index" [value]="i">{{colleges.name}}</option>
@@ -282,7 +282,7 @@
 
 
 
-            <form class="form-content mt-4" [formGroup]="collegeForm" (ngSubmit)="updateCollege()">
+            <form class="form-content mt-4" [formGroup]="adminForm" (ngSubmit)="updateAdmins()">
 
                 <div class="row d-flex align-items-center">
                     <header class="col-lg-3  ">اسم الكليه</header>
@@ -312,7 +312,7 @@
 
                 <div class="d-flex justify-content-center align-items-center mt-4">
 
-                    <button type="submit" class="btn add-btn  ml-3" [disabled]="collegeForm.invalid">تحديث</button>
+                    <button type="submit" class="btn add-btn  ml-3" [disabled]="adminForm.invalid">تحديث</button>
                 </div>
                 
             </form>
@@ -325,7 +325,7 @@
      
       </div>
     </div>
-  </div> -->
+  </div> 
 
 
 

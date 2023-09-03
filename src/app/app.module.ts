@@ -16,7 +16,9 @@ import { ProgramListComponent } from './applicant/program-list/program-list.comp
 import { ProgramDetailsComponent } from './applicant/program-details/program-details.component';
 import { ProgramApplicationComponent } from './applicant/program-application/program-application.component';
 import { MyprofileComponent } from './myprofile/myprofile.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { ShowStudentsComponent } from './employee/show-students/show-students.component';
 import { StudentReqDataComponent } from './employee/student-req-data/student-req-data.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +31,12 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
 import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
+
 import { CreateAdminsComponent } from './master/master-admins/create-admins/create-admins.component';
+import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
+
+import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
+
 
 
 
@@ -50,6 +57,7 @@ import { CreateAdminsComponent } from './master/master-admins/create-admins/crea
     ProgramApplicationComponent,
     MyprofileComponent,
     ShowStudentsComponent,
+    LoadingSpinnerComponent,
     
     StudentReqDataComponent,
          MasterComponent,
@@ -61,7 +69,8 @@ import { CreateAdminsComponent } from './master/master-admins/create-admins/crea
          AdminProgramComponent,
          AdminEmployeeComponent,
          CreateAdminsComponent,
-      
+         AdminProgramDetailsComponent,
+     
 
    
   ],

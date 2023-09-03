@@ -13,6 +13,7 @@ declare var $:any
 })
 export class CreateAdminsComponent {
   removeAdmin = -1
+  editAdmin!:any
   collageId!:any
   token =this.authService.user.value.token
   adminsLoad = false
@@ -103,8 +104,15 @@ export class CreateAdminsComponent {
     })
 
   }
-
-
+ 
+  onAdminsSelectionChange(selectedIndex:any){
+    console.log(selectedIndex);
+    
+    this.editAdmin = this.admiins.data.admins[selectedIndex]
+  }
+  updateAdmins(){
+    
+  }
   navigateToParentComponent()
   {
     this.router.navigate(['../'], { relativeTo: this.route });
