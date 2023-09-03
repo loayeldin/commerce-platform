@@ -40,9 +40,10 @@ export class AdminProgramComponent {
   removeProgramIndex = -1
   ngOnInit()
   {
-    this.getCollegeId()
+    // this.getCollegeId()
   
- 
+   console.log( this.collegeId = this.CookieService.get('collegeId'))
+    this.showPrograms()
   }
 
 
@@ -60,30 +61,30 @@ export class AdminProgramComponent {
   }
 
 // start display all programs//
- getCollegeId()
- {
+//  getCollegeId()
+//  {
  
-    const headers= new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    })
+//     const headers= new HttpHeaders({
+//       'Authorization': `Bearer ${this.token}`
+//     })
     
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/me`,{headers}).subscribe(data=>
-    {
-      this.CookieService.delete('collegeId');
-      this.adminProfile = data
-      this.collegeId = this.adminProfile.data.adminData.collage_id
-      console.log(this.collegeId)
-      this.CookieService.set('collegeId',this.collegeId) // put college id in cookies to use it in admin program details
-      this.showPrograms()
+//     return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/me`,{headers}).subscribe(data=>
+//     {
+//       this.CookieService.delete('collegeId');
+//       this.adminProfile = data
+//       this.collegeId = this.adminProfile.data.adminData.collage_id
+//       console.log(this.collegeId)
+//       this.CookieService.set('collegeId',this.collegeId) // put college id in cookies to use it in admin program details
+//       this.showPrograms()
      
-    },
-    err=>
-    {
-      console.log(err)
-    })
+//     },
+//     err=>
+//     {
+//       console.log(err)
+//     })
 
   
- }
+//  }
 
   showPrograms()
   {

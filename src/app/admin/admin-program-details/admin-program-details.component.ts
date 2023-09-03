@@ -35,6 +35,8 @@ export class AdminProgramDetailsComponent {
      this.programId = this.route.snapshot.paramMap.get('id');
      console.log(this.programId)
      this.collegeId =this.CookieService.get('collegeId')
+
+     console.log(this.programId,this.collegeId)
       this.showProgramDetails()
     
   }
@@ -127,7 +129,9 @@ export class AdminProgramDetailsComponent {
     },
     err=>
     {
-      console.log(err)
+      this.programFiles=undefined
+      this.isLoading = false
+   
     })
   }
 

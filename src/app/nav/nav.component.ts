@@ -24,7 +24,7 @@ export class NavComponent {
           // Perform your logic here
           this.authService.user.subscribe(data=>
             {
-              this.userName =data.id
+              this.userName =data.name
             })
           this.loggedIn=true
   
