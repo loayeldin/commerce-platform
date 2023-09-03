@@ -29,6 +29,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminProgramComponent } from './admin/admin-program/admin-program.component';
 import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
+import { CreateAdminsComponent } from './master/master-admins/create-admins/create-admins.component';
 
 
 
@@ -59,7 +60,8 @@ import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.co
          AdminHomeComponent,
          AdminProgramComponent,
          AdminEmployeeComponent,
-     
+         CreateAdminsComponent,
+      
 
    
   ],

@@ -1,1 +1,45 @@
-<p>master-admins works!</p>
+
+
+    <div class="px-4">
+        
+
+     
+      <div class="text-center mt-5"  *ngIf="!collegesLoad" >
+        <app-loading-spinner></app-loading-spinner>
+
+      </div>
+
+            <!--loading spinner-->
+
+
+
+           
+     
+       <div class="row mt-5" *ngIf="collegesLoad">
+
+        
+
+
+
+            <div class="college  col-md-4 mt-4 "    *ngFor="let colleges of colleges.data.collages ; let i =index" (click)="clickHere(i)">
+                <div class="rectangle-college-shape d-flex flex-column justify-content-center align-items-center " >
+
+                    
+
+                    <h5>{{colleges.name}}</h5>
+                    <h6 class="mt-4">{{colleges.university_name}}</h6>
+
+                    <div class="date mt-3">{{colleges.created_at}}</div>
+                    <div class="price mt-2">{{colleges.updated_at}}</div>
+                    
+                </div>
+
+            </div>
+
+    </div> 
+
+
+
+
+
+     
