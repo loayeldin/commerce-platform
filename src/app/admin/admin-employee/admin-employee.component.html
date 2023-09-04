@@ -15,7 +15,7 @@
                 </svg>
             </div>
 
-            <div class="reactangle-icon-shape mr-4 delete" data-toggle="modal" data-target="#ddeleteEmploye">
+            <div class="reactangle-icon-shape mr-4 delete" data-toggle="modal" data-target="#deleteEmploye">
                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 45 50" fill="none">
                     <path d="M31.875 12.5003H41.25V16.667H37.5V43.7503C37.5 44.3029 37.3025 44.8328 36.9508 45.2235C36.5992 45.6142 36.1223 45.8337 35.625 45.8337H9.375C8.87772 45.8337 8.40081 45.6142 8.04918 45.2235C7.69754 44.8328 7.5 44.3029 7.5 43.7503V16.667H3.75V12.5003H13.125V6.25033C13.125 5.69779 13.3225 5.16789 13.6742 4.77719C14.0258 4.38649 14.5027 4.16699 15 4.16699H30C30.4973 4.16699 30.9742 4.38649 31.3258 4.77719C31.6775 5.16789 31.875 5.69779 31.875 6.25033V12.5003ZM16.875 22.917V35.417H20.625V22.917H16.875ZM24.375 22.917V35.417H28.125V22.917H24.375ZM16.875 8.33366V12.5003H28.125V8.33366H16.875Z" fill="white"/>
                 </svg>
@@ -36,14 +36,8 @@
 </div>
 
 <!--loading spinner-->
-<!--loading spinner-->
-        <div class="text-center mt-5"  *ngIf="isLoading" >
-            <app-loading-spinner></app-loading-spinner>
 
-        </div>
-
-        <!--loading spinner-->
-       <div class="row mt-5" *ngIf="!isLoading && employeeData">
+      <div class="row mt-5" *ngIf="!isLoading && employeeData">
 
         
 
@@ -57,16 +51,18 @@
                 </div>
 
             </div> 
+      </div>
 
 
-
+    </div>
+</div>
   <!-- start create Employee -->
 
 <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title" id="exampleModalLabel">اضافه كليه</h5>
+          <h5 class="modal-title" id="exampleModalLabel">اضافه موظف</h5>
          
 
           <div data-dismiss="modal" aria-label="Close" style="font-size: 25px; cursor: pointer;">x</div>
@@ -107,9 +103,11 @@
                        
                     </div>
                 </div>
-                <div class="d-flex justify-content-center align-items-center mt-4">
+                <div class="d-flex justify-content-start align-items-center mt-4">
 
                     <button type="submit" class="btn add-btn  ml-3" [disabled]="addEmployee.invalid">اضافه</button>
+                    <button type="button" class="btn close-btn" data-dismiss="modal">اغلاق</button>
+
                 </div>
                 
             </form>
@@ -134,7 +132,7 @@
     <div class="modal-dialog modal-dialog-centered modal-arabic" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">مسح كليه</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">مسح موظف</h5>
 
           <div data-dismiss="modal" aria-label="Close" style="font-size: 25px; cursor: pointer;">x</div>
           
@@ -198,7 +196,7 @@
                         class="form-control"
                     
                       name="collegeToUpdate" 
-                      required
+                    
                       [(ngModel)]="UpdatEmployeeIndex"
                       (ngModelChange)="onEmployeeSelectChange($event)"
                       #editEmployeeSelect
@@ -250,9 +248,11 @@
         
         
     
-                    <div class="d-flex justify-content-center align-items-center mt-4">
+                    <div class="d-flex justify-content-start align-items-center mt-4">
     
                         <button type="submit" class="btn add-btn  ml-3" [disabled]="addEmployee.invalid">تحديث</button>
+                        <button type="button" class="btn close-btn" data-dismiss="modal">اغلاق</button>
+
                     </div>
                     
                 </form>

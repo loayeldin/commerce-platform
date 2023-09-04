@@ -50,5 +50,30 @@
     font-weight: 500;
 
 }
+.btn
+{
+    width: 150px;
+    height: 45px;
+    padding: 6px;
+    border-radius: 10px;
+    font-size: 20px;
+   
+    font-family: Cairo;
+    transition: .7s all;
 
+}
+.add-btn
+{
+    background: var(--Primary-Blue, #1778C2);
+    color: var(--White, #FFF);
+ 
+}
+
+
+.close-btn
+{
+    border: 1px solid var(--Red, #CD5858);
+    color: var(--Red, #CD5858);
+    background-color: transparent;
+}
 

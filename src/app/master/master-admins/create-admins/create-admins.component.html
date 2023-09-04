@@ -35,7 +35,7 @@
 
 
       <!--loading spinner-->
-      <div class="text-center mt-5"  *ngIf="!adminsLoad" >
+      <div class="text-center mt-5"  *ngIf="isLoading" >
         <app-loading-spinner></app-loading-spinner>
 
       </div>
@@ -46,7 +46,7 @@
 
            
      
-       <div class="row mt-5" *ngIf="adminsLoad">
+       <div class="row mt-5" *ngIf="!isLoading && admiins">
 
         
 
@@ -80,6 +80,7 @@
        </div>
 
     </div>
+    
 </div>
 
 
@@ -93,7 +94,7 @@
 
 
   <!-- add Admin Modal -->
-  <div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="!isLoading" class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -174,11 +175,11 @@
 
   
 
-  <div class="modal fade" id="deleteAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="adminsLoad">
+  <div *ngIf="!isLoading  && admiins" class="modal fade" id="deleteAdmin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered modal-arabic" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">مسح كليه</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">مسح مسؤول</h5>
 
           <div data-dismiss="modal" aria-label="Close" style="font-size: 25px; cursor: pointer;">x</div>
           
@@ -194,6 +195,7 @@
                   name="collegesToRemove" 
                   required
                   [(ngModel)]="removeAdmin"
+                  #removeAdminSelect
                   >
                   
                   <option   *ngFor="let admins of admiins.data.admins ; let i = index" [value]="i">{{admins.name}}</option>
@@ -222,8 +224,8 @@
 
 
 
-  <!-- update college Modal -->
-   <div class="modal fade" id="updateAdmin"  #updateAdminsModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- update admin Modal -->
+   <div *ngIf="!isLoading  && admiins" class="modal fade" id="updateAdmin"   tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -238,7 +240,7 @@
 
         <div class="modal-body p-5">
 
-          <div class="input-container" *ngIf="adminsLoad">
+          <div class="input-container" >
                
             <select id="college"
                 class="form-control"
@@ -247,6 +249,7 @@
               required
               [(ngModel)]="UpdateAdmin"
               (ngModelChange)="onAdminsSelectionChange($event)"
+              #updateAdminSelect
               >
               
               <option   *ngFor="let admin of admiins.data.admins ; let i = index" [value]="i">{{admin.name}}</option>
@@ -316,4 +319,4 @@
 
 
 
-<!--end update collede modal-->
+<!--end update admin modal-->

@@ -28,7 +28,7 @@ export class AdminEmployeeComponent implements OnInit{
   removeEmployeeIndex = -1
   UpdatEmployeeIndex!:any
   employeeData!:any
-  isLoading= false
+  isLoading= true
   collegeId!:any
   adminProfile!:any
   updateEmployee!:any
@@ -36,31 +36,33 @@ export class AdminEmployeeComponent implements OnInit{
   @ViewChild('editEmployeeSelect') editEmployeeSelect!: ElementRef;
   @ViewChild('removeEmployeeSelect') removeEmployeeSelect!: ElementRef;
  
-  ngAfterViewInit() {
-    
+  ngAfterContentChecked() {
+   
     // to reset form when use close update modal
-    $('#updateEmploye').on('hidden.bs.modal',  (e: any) => {
-      this.addEmployee.reset();
-      this.editEmployeeSelect.nativeElement.value = null;
-
-
-    })
-
-       
-         $('#addEmployee').on('hidden.bs.modal',  (e: any) => {
-            this.addEmployee.reset();
-           this.editEmployeeSelect.nativeElement.value = null;
-   
-        })
-        $('#deleteEmploye').on('hidden.bs.modal',  (e: any) => {
-           this.addEmployee.reset();
-          this.removeEmployeeSelect.nativeElement.value = null;
-       })
-
-
-
-   
-
+    if(this.employeeData != undefined)
+    {
+      console.log(this.employeeData)
+      $('#updateEmploye').on('hidden.bs.modal',  (e: any) => {
+        this.addEmployee.reset();
+        this.editEmployeeSelect.nativeElement.value = null;
+    
+    
+      })
+    
+         
+           $('#addEmployee').on('hidden.bs.modal',  (e: any) => {
+              this.addEmployee.reset();
+             this.editEmployeeSelect.nativeElement.value = null;
+             console.log('ssssssssss')
+     
+          })
+          $('#deleteEmploye').on('hidden.bs.modal',  (e: any) => {
+             this.addEmployee.reset();
+            this.removeEmployeeSelect.nativeElement.value = null;
+         })
+    
+      
+    }
 
 
   }
@@ -78,7 +80,7 @@ export class AdminEmployeeComponent implements OnInit{
       console.log('program added')
       $('#addEmployee').modal('hide')
       this.showEmployee()
-     
+      this.addEmployee.reset();
     },
     err=>
     {
@@ -98,8 +100,16 @@ export class AdminEmployeeComponent implements OnInit{
     
     this.employeeData = data
     console.log(data);
+    this.isLoading = false
+    },
     
-    })
+    err=>
+    {
+      this.addEmployee.reset()
+      this.employeeData = undefined
+      console.log(err)
+    }
+    )
   }
 
   navigateToParentComponent()
@@ -113,14 +123,14 @@ export class AdminEmployeeComponent implements OnInit{
     
   }
   onEmployeeSelectChange(SelectedIndex:any){
-    console.log(SelectedIndex);
+    console.log(SelectedIndex,this.employeeData.data);
     
-    this.updateEmployee = this.employeeData.data.employee[SelectedIndex]
-
+    this.updateEmployee = this.employeeData.data.employees[SelectedIndex]
+    console.log(this.updateEmployee)
     this.addEmployee.patchValue({
       name:this.updateEmployee.name,
-      email:this.updateEmployee.name,
-      password:this.updateEmployee.name
+      email:this.updateEmployee.email,
+      // password:this.updateEmployee.password
     })
     
   }

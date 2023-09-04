@@ -17,7 +17,7 @@ export class CreateAdminsComponent {
   UpdateAdmin!:any
   collageId!:any
   token =this.authService.user.value.token
-  adminsLoad = false
+  isLoading = true 
   colleges!:any
   admiins!:any
   err!:any
@@ -29,19 +29,50 @@ export class CreateAdminsComponent {
       password: new FormControl('',Validators.required),
       // universityName: new FormControl('',[Validators.required])
     })
-    @ViewChild('updateAdminsModal') updateAdminsModal!: ElementRef ;
+
+
+
+    @ViewChild('updateAdminSelect') updateAdminSelect!: ElementRef;
+    @ViewChild('removeAdminSelect') removeAdminSelect!: ElementRef;
+
+
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   ngOnInit(): void {
     this.showAdmin()
   }
-  ngAfterViewInit() {
-    
-    // to reset form when use close update modal
-    $('#updateAdmin').on('hidden.bs.modal',  (e: any) => {
-      // do something...
-      this.adminForm.reset();
-    })
+  ngAfterContentChecked()
+  {
+    if(this.admiins !=undefined)
+    {
+      setTimeout(() => {
+        $('#addAdmin').on('hidden.bs.modal', () => {
+            this.adminForm.reset();
+            this.updateAdminSelect.nativeElement.value = null;
+  
+            // Reset the <select> element to its initial value
+        });
+  
+        $('#updateAdmin').on('hidden.bs.modal', () => {
+            this.adminForm.reset();
+         
+            // Reset the <select> element to its initial value
+            this.updateAdminSelect.nativeElement.value = null;
+        });
+  
+  
+        $('#deleteAdmin').on('hidden.bs.modal', () => {
+          this.adminForm.reset();
+       
+          // Reset the <select> element to its initial value
+          this.removeAdminSelect.nativeElement.value = null;
+      });
+    }, 1000); // Delay for 1 second
+  
+    }
   }
+
+
+  
   CLICK(index:any){
     const CollegeId = this.colleges.data[index].id;
     console.log(CollegeId);
@@ -80,7 +111,7 @@ export class CreateAdminsComponent {
     this.collageId = this.route.snapshot.paramMap.get('id')
     return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins`, {headers}).subscribe(data=>{
       this.admiins = data
-      this.adminsLoad = true
+      this.isLoading = false
       this.err = undefined
       
       
@@ -88,7 +119,8 @@ export class CreateAdminsComponent {
     },
     err=>{
       this.err = err.error.message
-      this.adminsLoad=true
+      // this.isLoading=true
+      this.admiins = undefined
     }
     )
   }
@@ -104,7 +136,7 @@ export class CreateAdminsComponent {
     return this.http.delete(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${selectedCollegeId}`,{headers}).subscribe(data=>
     {
       console.log(data)
-      $('#deleteCollege').modal('hide')
+      $('#deleteAdmin').modal('hide')
       this.showAdmin()
     
     },
@@ -140,6 +172,7 @@ export class CreateAdminsComponent {
       console.log(data)
       this.showAdmin()
       $('#updateAdmin').modal('hide')
+      this.updateAdminSelect.nativeElement.value = null;
     },
     err=>
     {
