@@ -29,7 +29,7 @@ export class CreateAdminsComponent {
       password: new FormControl('',Validators.required),
       // universityName: new FormControl('',[Validators.required])
     })
-    @ViewChild('updateCollegeModal') updateCollegeModal!: ElementRef ;
+    @ViewChild('updateAdminsModal') updateAdminsModal!: ElementRef ;
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   ngOnInit(): void {
     this.showAdmin()

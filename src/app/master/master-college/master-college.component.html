@@ -199,6 +199,7 @@
                   name="collegesToRemove" 
                   required
                   [(ngModel)]="removeCollegeIndex"
+                  #deleteCollegeSelect
                   >
                   
                   <option   *ngFor="let colleges of colleges.data.collages ; let i = index" [value]="i">{{colleges.name}}</option>
@@ -228,7 +229,11 @@
 
 
   <!-- update college Modal -->
-  <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+
+   <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -245,7 +250,7 @@
 
           <div class="input-container" *ngIf="collegesLoad">
                
-            <select id="college"
+            <!-- <select id="college"
                 class="form-control"
             
               name="collegeToUpdate" 
@@ -253,10 +258,24 @@
               [(ngModel)]="collegeUpdateIndex"
               (ngModelChange)="onCollegeSelectionChange($event)"
               >
-              
+              <option disabled> اختر</option>
               <option   *ngFor="let colleges of colleges.data.collages ; let i = index" [value]="i">{{colleges.name}}</option>
               
-            </select>
+            </select> -->
+
+            <select
+            id="college"
+            class="form-control"
+            name="collegeToUpdate"
+            required
+            [(ngModel)]="collegeUpdateIndex"
+            (ngModelChange)="onCollegeSelectionChange($event)"
+            #editCollegeSelect
+          >
+            <option *ngFor="let colleges of colleges.data.collages; let i = index" [value]="i">{{colleges.name}}</option>
+          </select>
+          
+          
           </div>
 
 
@@ -304,9 +323,8 @@
 
      
       </div>
+
     </div>
-  </div>
- 
 
 
 

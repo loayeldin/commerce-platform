@@ -23,9 +23,9 @@
 }
 .rectangle-employee-shape
 {
-    background: var(--White, #FFF);
+    background: var(--White, #d4d4d4);
     padding: 30px;
-    text-align: center;
+    
     min-height: 185px;
     cursor: pointer;
     /* PDF Style */
@@ -50,3 +50,5 @@
     font-weight: 500;
 
 }
+
+

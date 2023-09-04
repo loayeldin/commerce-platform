@@ -6,7 +6,8 @@ export class User
         public id:string,
        
         public token:string,
-        public role:string
+        public role:string,
+        public name:string
 
 ){}
 }

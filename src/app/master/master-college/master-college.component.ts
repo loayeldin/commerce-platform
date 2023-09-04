@@ -15,7 +15,7 @@ export class MasterCollegeComponent {
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   removeCollegeIndex = -1
   updateCollegeData!:any
-  collegeUpdateIndex!:any
+  collegeUpdateIndex: number | null = null;
   token =this.authService.user.value.token
   collegesLoad = false
   colleges!:any
@@ -25,7 +25,8 @@ export class MasterCollegeComponent {
       name: new FormControl('',[Validators.required]),
       universityName: new FormControl('',[Validators.required])
     })
-    @ViewChild('updateCollegeModal') updateCollegeModal!: ElementRef ;
+    @ViewChild('editCollegeSelect') editCollegeSelect!: ElementRef ;
+    @ViewChild('deleteCollegeSelect') deleteCollegeSelect!: ElementRef ;
 
     
 
@@ -33,14 +34,35 @@ export class MasterCollegeComponent {
     
       // to reset form when use close update modal
       $('#updateCollege').on('hidden.bs.modal',  (e: any) => {
-        // do something...
         this.collegeForm.reset();
+        this.editCollegeSelect.nativeElement.value = null;
+
+ 
       })
+
+         
+           $('#addCollege').on('hidden.bs.modal',  (e: any) => {
+             this.collegeForm.reset();
+             this.editCollegeSelect.nativeElement.value = null;
+     
+          })
+          $('#deleteCollege').on('hidden.bs.modal',  (e: any) => {
+            this.collegeForm.reset();
+            this.deleteCollegeSelect.nativeElement.value = null;
+         })
+
+
+
+     
+
+
+
     }
 
     ngOnInit()
     {
       this.showColleges()
+     
 
    
     }
@@ -187,5 +209,6 @@ export class MasterCollegeComponent {
       this.router.navigate(['../'], { relativeTo: this.route });
 
     }
-
+  
+    
   }

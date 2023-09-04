@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-myprofile',
@@ -9,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class MyprofileComponent {
 
-  constructor(private authService:AuthService, private http:HttpClient){}
+  constructor(private authService:AuthService, private http:HttpClient, private CookieService:CookieService){}
    token = this.authService.user.value.token 
    userRole= this.authService.user.value.role
 profileLoaded=false
@@ -42,6 +44,7 @@ profileAdminData!:any
       this.profileAdminData = data
       this.profileMasterData = undefined
       this.profileLoaded=true
+      // this.CookieService.set('admin-name',this.profileAdminData.data.adminData.name)
      }
      
     },

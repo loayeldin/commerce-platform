@@ -46,13 +46,13 @@
         </div>
 
         <!--loading spinner-->
-       <div class="row mt-5" *ngIf="!isLoading">
+       <div class="row mt-5" *ngIf="!isLoading && programsData">
 
         
 
 
 
-            <div class="diploma  col-md-4 mt-4 " *ngFor="let program of programsData.data.programs ; let i = index" (click)="openProgramDetails(i)">
+            <div  class="diploma  col-md-4 mt-4 " *ngFor="let program of programsData.data.programs ; let i = index" (click)="openProgramDetails(i)">
                 <div class="rectangle-diploma-shape">
                     <h5>{{program.name}}</h5>
                 
@@ -90,7 +90,7 @@
 
 
   <!-- add diploma modal -->
-   <div *ngIf="!isLoading" class="modal fade" id="addDiploma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div *ngIf="!isLoading  " class="modal fade" id="addDiploma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -236,7 +236,7 @@
 
 
   <!-- update diploma modal -->
-  <div *ngIf="!isLoading" class="modal fade" id="updateDiploma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="!isLoading  && programsData" class="modal fade" id="updateDiploma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-arabic  modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header d-flex justify-content-between">
@@ -260,11 +260,13 @@
                   required
                   [(ngModel)]="programUpdateIndex"
                   (ngModelChange)="onCollegeSelectionChange($event)"
+                  #editProgramSelect
                   >
-                  
+
                   <option   *ngFor="let program of programsData.data.programs ; let i = index" [value]="i">{{program.name}}</option>
                   
                 </select>
+
               </div>
 
             <form class="form-content mt-4" [formGroup]="addDiploma" (ngSubmit)="onSubmitUpdateProgram()">
@@ -393,7 +395,7 @@
 
 <!-- start delete college -->
 
-<div *ngIf="!isLoading" class="modal fade" id="deleteProgram" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+<div *ngIf="!isLoading  && programsData" class="modal fade" id="deleteProgram" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-centered modal-arabic" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -413,6 +415,7 @@
                   name="programToRemove" 
                   required
                   [(ngModel)]="removeProgramIndex"
+                  #removeProgramSelect
                   >
                   
                   <option   *ngFor="let program of programsData.data.programs ; let i = index" [value]="i">{{program.name}}</option>
