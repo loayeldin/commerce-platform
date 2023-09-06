@@ -12,13 +12,17 @@
           
 
             <!-- profile master data-->
-            <div class="input-container" *ngIf="profileMasterData">
+            <div class="input-container d-flex flex-column justify-content-start align-items-start" *ngIf="profileMasterData">
+                <label for="" class="label-style"> الايميل</label>
+
                 <input type="text" class="form-control" [value]="profileMasterData.data.master.name" disabled>
             </div>
 
 
             
-            <div class="input-container mt-4" *ngIf="profileMasterData">
+            <div class="input-container mt-4 d-flex flex-column justify-content-start align-items-start" *ngIf="profileMasterData">
+                <label for="" class="label-style"> الايميل</label>
+
                 <input type="email" class="form-control" [value]="profileMasterData.data.master.email" disabled>
             </div>
 
@@ -31,13 +35,16 @@
             <!-- profile admin data-->
 
 
-            <div class="input-container" *ngIf="profileAdminData">
+            <div class="input-container d-flex flex-column justify-content-start align-items-start" *ngIf="profileAdminData">
+                <label for="" class="label-style"> الاسم</label>
+
                 <input type="text" class="form-control" [value]="profileAdminData.data.adminData.name" disabled>
             </div>
 
 
             
-            <div class="input-container mt-4" *ngIf="profileAdminData">
+            <div class="input-container mt-4 d-flex flex-column justify-content-start align-items-start" *ngIf="profileAdminData">
+                <label for="" class="label-style"> الايميل</label>
                 <input type="email" class="form-control" [value]="profileAdminData.data.adminData.email" disabled>
             </div>
 
@@ -45,6 +52,47 @@
 
             
             <!-- profile admin data-->
+
+
+
+
+
+                
+            <!-- profile applicant data-->
+
+
+            <div class="input-container d-flex flex-column justify-content-start align-items-start" *ngIf="profileApplicantData">
+                <label for="" class="label-style"> الاسم</label>
+                <input type="text" class="form-control" [value]="profileApplicantData.data.applicant.name" disabled>
+            </div>
+
+
+            
+            <div class="input-container mt-4  d-flex flex-column justify-content-start align-items-start" *ngIf="profileApplicantData">
+                <label for="" class="label-style"> الايميل</label>
+
+                <input type="email" class="form-control" [value]="profileApplicantData.data.applicant.email" disabled>
+            </div>
+
+
+
+            <div class="input-container mt-4 d-flex flex-column justify-content-start align-items-start" *ngIf="profileApplicantData">
+                <label for="" class="label-style"> الرقم القومي</label>
+
+                <input type="number" class="form-control" [value]="profileApplicantData.data.applicant.national_id" disabled>
+            </div>
+
+
+            <div class="input-container mt-4 d-flex flex-column justify-content-start align-items-start" *ngIf="profileApplicantData">
+                <label for="" class="label-style"> النوع </label>
+
+                <input type="text" class="form-control" [value]="profileApplicantData.data.applicant.gender" disabled>
+            </div>
+
+
+
+            
+            <!--  profile applicant data-->
       
             <div class="input-container d-flex justify-content-between align-items-center p-5">
                 <button class=" delete-acc mt-4" type="button" disabled>حذف الحساب</button>

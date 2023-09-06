@@ -12,16 +12,25 @@ import { CookieService } from 'ngx-cookie-service';
 export class MyprofileComponent {
 
   constructor(private authService:AuthService, private http:HttpClient, private CookieService:CookieService){}
-   token = this.authService.user.value.token 
-   userRole= this.authService.user.value.role
-profileLoaded=false
+   token!:any
+  //  userRole= this.authService.user.value.role
+  userRole!:any
+profileLoaded=true
 profileMasterData!:any
 profileAdminData!:any
+profileApplicantData!:any
 
-  
+  test:any
    ngOnInit()
    {
+    // this.getMyProfile()
+    this.authService.getCookies()
+
+ 
+    this.userRole = this.authService.user.value.role
+    this.token = this.authService.user.value.token
     this.getMyProfile()
+  
    }
 
   getMyProfile()
@@ -33,19 +42,26 @@ profileAdminData!:any
     return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/${this.userRole}/me`,{headers}).subscribe(data=>
     {
       console.log(data)
-     if(this.userRole == 'master')
-     {
+      this.userRole = this.authService.user.value.role
 
-      this.profileAdminData =undefined
-      this.profileMasterData = data
-      this.profileLoaded=true
-     }else if (this.userRole =='admin')
-     {
-      this.profileAdminData = data
-      this.profileMasterData = undefined
-      this.profileLoaded=true
-      // this.CookieService.set('admin-name',this.profileAdminData.data.adminData.name)
-     }
+      console.log(this.userRole)
+  
+      if(this.userRole == 'master')
+      {
+        this.profileMasterData = data
+        console.log(this.profileMasterData,this.userRole)
+      }else if (this.userRole == 'admin')
+      {
+        this.profileAdminData = data
+        console.log(this.profileAdminData,this.userRole)
+  
+      }else if (this.userRole == 'applicant')
+      {
+        this.profileApplicantData = data
+        console.log(this.profileApplicantData,this.userRole)
+  
+      }
+     
      
     },
     err=>

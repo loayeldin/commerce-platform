@@ -14,6 +14,10 @@ export class AuthService {
   
   myProfileData!:any
   userName!:any
+  adminProfile!:any
+  masterProifle!:any
+  applicantProfile!:any
+
   constructor(private http:HttpClient ,private router:Router,private CookieService:CookieService) { }
 
 
@@ -53,8 +57,25 @@ export class AuthService {
     let userToken=resData.data.tokens
 
     let userRole=resData.data.master.role
+    
 
-    this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
+
+    if(userRole == 'master')
+    {
+      this.router.navigate(['/master'])
+      this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
+
+    }else if (userRole == 'admin')
+    {
+      this.router.navigate(['/admin'])
+      this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
+
+
+    }else if (userRole == 'applicant')
+    {
+      this.router.navigate(['/applicant'])
+      this.getMyProfile(userToken,userRole,userId) 
+    }
 
     //  const newUser = new User(userId,userToken,userRole,this.userName)
     //   this.user.next(newUser)
@@ -153,8 +174,9 @@ export class AuthService {
      if(userRole == 'master')
      {
        
-      this.myProfileData =data
-      this.userName  = this.myProfileData.data.master.name
+      
+      this.masterProifle =data
+      this.userName  = this.masterProifle.data.master.name
 
        const newUser = new User(userId,token,userRole,this.userName)
         this.user.next(newUser)
@@ -162,38 +184,52 @@ export class AuthService {
   
        
   
-       this.setCookies(token,userId,userRole,this.userName,null)
+       this.setCookies(token,userId,userRole,this.userName,null) // no need to fourth paramter there
        console.log(this.user.value)
    
         this.loggedIn.next(true)
       
       
-        this.router.navigate(['/master'])
 
 
 
      }else if (userRole =='admin')
      {
-      this.myProfileData =data
-      this.userName  = this.myProfileData.data.adminData.name
+      this.adminProfile =data
+      this.userName  = this.adminProfile.data.adminData.name
 
        const newUser = new User(userId,token,userRole,this.userName)
         this.user.next(newUser)
   
   
        
-      const collegeId= this.myProfileData.data.adminData.collage_id
+      const collegeId= this.adminProfile.data.adminData.collage_id
        this.setCookies(token,userId,userRole,this.userName,collegeId)
        console.log(this.user.value)
    
         this.loggedIn.next(true)
       
       
-        this.router.navigate(['/admin'])
       // this.profileAdminData = data
       // this.profileMasterData = undefined
       // this.profileLoaded=true
       // this.CookieService.set('admin-name',this.profileAdminData.data.adminData.name)
+     }else if (userRole == 'applicant')
+     {
+      this.applicantProfile =data
+      this.userName  = this.applicantProfile.data.applicant.name
+
+       const newUser = new User(userId,token,userRole,this.userName)
+        this.user.next(newUser)
+  
+  
+       
+      // const collegeId= this.applicantProfile.data.adminData.collage_id
+       this.setCookies(token,userId,userRole,this.userName,null)
+       console.log(this.user.value)
+   
+        this.loggedIn.next(true)
+      
      }
      
     },
