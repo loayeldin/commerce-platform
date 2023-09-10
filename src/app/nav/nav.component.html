@@ -70,6 +70,9 @@
                     <div class="dropdown" >
                       <span  data-toggle="dropdown" aria-expanded="true">{{userName}}</span>
                       <div class="dropdown-menu">
+
+                        <a class="dropdown-item myProfile text-right" routerLink="/applicant/MyApplications" *ngIf="userRole == 'applicant'"> الدبلومات السابقه</a>
+
                         <a class="dropdown-item myProfile text-right" routerLink="/myprofile">معلومات الحساب</a>
                         
                         

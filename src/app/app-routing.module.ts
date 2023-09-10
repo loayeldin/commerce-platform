@@ -21,6 +21,9 @@ import { AdminProgramComponent } from './admin/admin-program/admin-program.compo
 import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.component';
 import { CreateAdminsComponent } from './master/master-admins/create-admins/create-admins.component';
 import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
+import { AuthGuard } from './auth.guard';
+import { AllApplicationsComponent } from './applicant/all-applications/all-applications.component';
+import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
 
 
 
@@ -28,20 +31,25 @@ import { AdminProgramDetailsComponent } from './admin/admin-program-details/admi
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
    {path:'home',component:HomePageComponent},
-  {path:'login',component:LoginComponent},
-  {path:'myprofile',component:MyprofileComponent},
+  {path:'login',component:LoginComponent,},
+  {path:'myprofile',component:MyprofileComponent,},
   {path:'signup',component:SignupComponent},
 
 
   {path:'applicant',component:ApplicantComponent,children:[
     {path:'',redirectTo:'program-list', pathMatch:'full'},
     {path:'program-list',component:ProgramListComponent},
-    {path:'program-details',component:ProgramDetailsComponent},
-    {path:'program-application',component:ProgramApplicationComponent},
+    {path:'program-list/:id',component:ProgramDetailsComponent},
+    {path:'program-list/:id/program-application',component:ProgramApplicationComponent},
+
+
+    {path:'MyApplications', component:AllApplicationsComponent},
+    {path:'MyApplications/:id', component:ApplicationDetailsComponent}
   ]},
 
   {path:'employee', component:EmployeeComponent,children:[
     {path:'',redirectTo:'showStudents',pathMatch:'full'},
+ 
     {path:'showStudents', component:ShowStudentsComponent},
     { path:'showStudents/:id', component:StudentReqDataComponent}
 

@@ -21,7 +21,7 @@ export class AdminProgramDetailsComponent {
   formattedUpdatedDate!:any
   programFiles!:any
   isLoading = true
-  token = this.authService.user.value.token
+  token !:any
   removeFileIndex =-1
 
   @ViewChild('deleteFileSelect') deleteFileSelect!: ElementRef;
@@ -33,6 +33,10 @@ export class AdminProgramDetailsComponent {
 
   ngOnInit()
   {
+
+    this.authService.getCookies()
+  this.token = this.authService.user.value.token
+
      this.programId = this.route.snapshot.paramMap.get('id');
      console.log(this.programId)
      this.collegeId =this.CookieService.get('collegeId')
@@ -44,27 +48,35 @@ export class AdminProgramDetailsComponent {
 
 
 
-  ngAfterViewInit() {
+  ngAfterContentChecked() {
     
-   setTimeout(() => {
-     // to reset form when use close update modal
-     $('#addFile').on('hidden.bs.modal',  (e: any) => {
-      // do something...
-      this.addFile.reset();
-
-
+    if(this.programFiles !=undefined)
+    {
+      setTimeout(() => {
+        // to reset form when use close update modal
+        $('#addFile').on('hidden.bs.modal',  (e: any) => {
+         // do something...
+         this.addFile.reset();
    
-    
-    })
-
-
-    $('#deleteFile').on('hidden.bs.modal',  (e: any) => {
-      // do something...
-      // this.removeFileIndex = -1
-      this.deleteFileSelect.nativeElement.value = null
-    
-    })
-   }, 3000);
+   
+      
+       
+       })
+   
+   
+    //    $('#deleteFile').on('show.bs.modal', () => {
+          
+    //      // Reset the <select> element to its initial value
+    //      this.deleteFileSelect.nativeElement.value = null;
+    //  });
+       $('#deleteFile').on('show.bs.modal',  (e: any) => {
+         // do something...
+         // this.removeFileIndex = -1
+         this.deleteFileSelect.nativeElement.value = null
+       
+       })
+      }, 1000);
+    }
   
     
 
@@ -138,6 +150,7 @@ export class AdminProgramDetailsComponent {
     },
     err=>
     {
+     
       this.programFiles=undefined
       this.isLoading = false
    

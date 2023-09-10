@@ -8,11 +8,18 @@
             </div>
         </header>
 
-        <div class="list">
+
+        <div *ngIf="isLoading">
+            <app-loading-spinner>
+
+            </app-loading-spinner>
+        </div>
+
+        <div class="list" *ngIf="programList && !isLoading">
 
             <ol>
-                <li *ngFor="let program of programList ; let i = index" class="mb-4" (click)="showProgramDetails(i)">
-                    {{program}}
+                <li *ngFor="let program of programList.data.programs ; let i = index" class="mb-4" (click)="showProgramDetails(i)">
+                    {{program.name}}
                 </li>
 
 

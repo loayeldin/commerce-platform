@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -14,16 +14,14 @@ export class AdminProgramComponent {
 
   constructor(private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute,private CookieService:CookieService){}
   addDiploma = new FormGroup({
-    'name': new FormControl(),
-    'description' : new FormControl(),
-    'applying_fees': new FormControl(),
-    'program_fees' : new FormControl(),
-    'open_at' : new FormControl(),
-    'close_at' : new FormControl(),
-    'credit_hour_fees': new FormControl(),
-
-
-  })
+    'name': new FormControl('', [Validators.required]),
+    'description': new FormControl('', [Validators.required]),
+    'applying_fees': new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+    'program_fees': new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+    'open_at': new FormControl('', [Validators.required]),
+    'close_at': new FormControl('', [Validators.required]),
+    'credit_hour_fees': new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]),
+  });
 
 
   programUpdateIndex!:any
@@ -96,6 +94,12 @@ export class AdminProgramComponent {
             // Reset the <select> element to its initial value
             this.editProgramSelect.nativeElement.value = null;
         });
+
+        $('#updateDiploma').on('show.bs.modal', () => {
+       
+          // Reset the <select> element to its initial value
+          this.editProgramSelect.nativeElement.value = null;
+      });
   
   
         $('#deleteProgram').on('hidden.bs.modal', () => {
@@ -114,7 +118,7 @@ export class AdminProgramComponent {
   ngOnInit()
   {
     // this.getCollegeId()
-  
+  this.authService.getCookies()
     this.collegeId = this.CookieService.get('collegeId')
     this.showPrograms()
     console.log(this.programUpdateIndex)
@@ -168,9 +172,14 @@ export class AdminProgramComponent {
     },
     err=>
     {
-      this.addDiploma.reset()
-      this.programsData = undefined
-      console.log(err)
+      // this.addDiploma.reset()
+      if(err.error.message == 'Fetching programs failed, please try again later.')
+      {
+        this.isLoading = false
+        this.programsData = undefined
+        console.log(err)
+      }
+    
     
     })
   }
@@ -267,9 +276,11 @@ export class AdminProgramComponent {
       .subscribe(data=>
       {
         console.log(data)
+        $('#updateDiploma').modal('hide')
+        this.editProgramSelect.nativeElement.value = null;
        this.showPrograms()
       
-        this.editProgramSelect.nativeElement.value = null;
+      
        
       
       },

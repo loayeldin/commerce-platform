@@ -46,11 +46,22 @@
         </div>
 
         <!--loading spinner-->
+
+         <!-- programs not found-->
+        <div  *ngIf="!programsData && !isLoading" class="mt-5">
+          <h3>
+              لا يوجد برامج
+          </h3>  
+        </div>
+
+        <!-- programs not found-->
+
+
        <div class="row mt-5" *ngIf="!isLoading && programsData">
 
         
 
-
+        
 
             <div  class="diploma  col-md-4 mt-4 " *ngFor="let program of programsData.data.programs ; let i = index" (click)="openProgramDetails(i)">
                 <div class="rectangle-diploma-shape">
@@ -112,7 +123,7 @@
                     
                     <div class="col-lg-5">
                        
-                            <input type="text" class="form-control" formControlName="name" required>
+                            <input type="text" class="form-control" formControlName="name" >
                        
                     </div>
                 </div>

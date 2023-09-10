@@ -35,6 +35,8 @@ import { AdminEmployeeComponent } from './admin/admin-employee/admin-employee.co
 import { CreateAdminsComponent } from './master/master-admins/create-admins/create-admins.component';
 import { AdminProgramDetailsComponent } from './admin/admin-program-details/admin-program-details.component';
 import { AddAdminComponent } from './admin-employee/add-admin/add-admin.component';
+import { AllApplicationsComponent } from './applicant/all-applications/all-applications.component';
+import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
 
 
 
@@ -72,6 +74,8 @@ import { AddAdminComponent } from './admin-employee/add-admin/add-admin.componen
          AdminEmployeeComponent,
          CreateAdminsComponent,
          AdminProgramDetailsComponent,
+         AllApplicationsComponent,
+         ApplicationDetailsComponent,
         
         
      

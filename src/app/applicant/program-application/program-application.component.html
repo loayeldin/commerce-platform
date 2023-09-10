@@ -49,7 +49,10 @@
 
 
 
-        <form class="d-flex align-items-center flex-column" [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+        <form class="d-flex align-items-center flex-column"  *ngIf="programFiles">
+
+
+<!--           
           <div class="input-container">
             <input type="file" id="Bachelor-degree" style="display: none"  (change)="handleDegreeChange($event)">
             <label for="Bachelor-degree" class="d-flex justify-content-between align-items-center" style="cursor: pointer;">
@@ -76,9 +79,45 @@
 
             </label>
            
-          </div>
+          </div> -->
         
-          <button class="btn mt-4" type="submit">ارسال</button>
+          <div *ngFor="let file of programFiles.data.programFiles">
+            <header class="d-flex justify-content-start mr-1 mt-3">
+              {{ file.name }}
+            </header>
+            <div class="input-container">
+              <input
+                type="file"
+                [id]="file.name"
+                style="display: none"
+                (change)="onFileSelected($event, file)"
+                [accept]="file.type"
+                required
+              />
+              <label for="{{ file.name }}" class="d-flex justify-content-between align-items-center" style="cursor: pointer;">
+                <span class="Bachelor-degree-label">  {{ selectedFileValues[file.name] || 'Choose a file' }} ({{ file.type }})
+                </span>
+          
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 19H20V12H22V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V12H4V19ZM13 9V16H11V9H6L12 3L18 9H13Z" fill="#7F7C7E" />
+                </svg>
+              </label>
+            </div>
+          </div>
+          
+<!-- 
+          <div *ngFor="let file of programFiles.data.programFiles">
+            <label for="{{ file.name }}">{{ file.name }}</label>
+            <input
+              type="file"
+              [id]="file.name"
+              [accept]="file.type"
+              (change)="onFileSelected($event, file.uploadUrl)"
+            />
+          </div> -->
+          
+
+          <button class="btn mt-4" type="submit" (click)="onFormSubmit()" [disabled]="!allUpload">ارسال</button>
         </form>
         
     

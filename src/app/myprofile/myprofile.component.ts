@@ -19,6 +19,7 @@ profileLoaded=true
 profileMasterData!:any
 profileAdminData!:any
 profileApplicantData!:any
+profileEmployeeData!:any
 
   test:any
    ngOnInit()
@@ -59,6 +60,10 @@ profileApplicantData!:any
       {
         this.profileApplicantData = data
         console.log(this.profileApplicantData,this.userRole)
+  
+      }else if (this.userRole == 'employee')
+      {
+        this.profileEmployeeData = data
   
       }
      

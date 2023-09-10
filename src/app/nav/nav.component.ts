@@ -12,6 +12,7 @@ export class NavComponent {
 
   loggedIn = false
   userName!:any
+  userRole!:any
   constructor(private authService:AuthService){}
 
   ngOnInit()
@@ -25,6 +26,7 @@ export class NavComponent {
           this.authService.user.subscribe(data=>
             {
               this.userName =data.name
+              this.userRole = data.role
             })
           this.loggedIn=true
   

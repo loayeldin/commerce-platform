@@ -17,6 +17,7 @@ export class AuthService {
   adminProfile!:any
   masterProifle!:any
   applicantProfile!:any
+  employeeProfile!:any
 
   constructor(private http:HttpClient ,private router:Router,private CookieService:CookieService) { }
 
@@ -58,25 +59,25 @@ export class AuthService {
 
     let userRole=resData.data.master.role
     
+    this.getMyProfile(userToken,userRole,userId)
+
+    // if(userRole == 'master')
+    // {
+    //   this.router.navigate(['/master'])
+    //   this.getMyProfile(userToken,userRole,userId)
+    //   // call it to get userName first before put data in user & cookies
+
+    // }else if (userRole == 'admin')
+    // {
+    //   this.router.navigate(['/admin'])
+    //   this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
 
 
-    if(userRole == 'master')
-    {
-      this.router.navigate(['/master'])
-      this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
-
-    }else if (userRole == 'admin')
-    {
-      this.router.navigate(['/admin'])
-      this.getMyProfile(userToken,userRole,userId) // call it to get userName first before put data in user & cookies
-
-
-    }else if (userRole == 'applicant')
-    {
-      this.router.navigate(['/applicant'])
-      this.getMyProfile(userToken,userRole,userId) 
-    }
-
+    // }else if (userRole == 'applicant')
+    // {
+    //   this.router.navigate(['/applicant/program-list']);
+    //   this.getMyProfile(userToken,userRole,userId) 
+    // }
     //  const newUser = new User(userId,userToken,userRole,this.userName)
     //   this.user.next(newUser)
 
@@ -110,7 +111,7 @@ export class AuthService {
     this.CookieService.set('role',role);
     this.CookieService.set('name',userName)
   
-    if(this.user.value.role == 'admin')
+    if(this.user.value.role == 'admin' || this.user.value.role == 'applicant' || this.user.value.role == 'employee')
     {
       this.CookieService.set('collegeId',collegeId)
     }
@@ -189,7 +190,8 @@ export class AuthService {
    
         this.loggedIn.next(true)
       
-      
+        this.router.navigate(['/master'])
+
 
 
 
@@ -208,7 +210,7 @@ export class AuthService {
        console.log(this.user.value)
    
         this.loggedIn.next(true)
-      
+        this.router.navigate(['/admin'])
       
       // this.profileAdminData = data
       // this.profileMasterData = undefined
@@ -223,13 +225,40 @@ export class AuthService {
         this.user.next(newUser)
   
   
-       
+        const collegeId= this.applicantProfile.data.collage.id
+
+        console.log(collegeId)
+
       // const collegeId= this.applicantProfile.data.adminData.collage_id
-       this.setCookies(token,userId,userRole,this.userName,null)
+       this.setCookies(token,userId,userRole,this.userName,collegeId)
        console.log(this.user.value)
    
         this.loggedIn.next(true)
+        this.router.navigate(['/applicant/program-list']);
+
       
+     } else if (userRole = 'employee')
+     {
+
+      this.employeeProfile =data
+      this.userName  = this.employeeProfile.data.employee.name
+
+       const newUser = new User(userId,token,userRole,this.userName)
+        this.user.next(newUser)
+  
+  
+        const collegeId= this.employeeProfile.data.collage.id
+
+        console.log(collegeId)
+
+      // const collegeId= this.applicantProfile.data.adminData.collage_id
+       this.setCookies(token,userId,userRole,this.userName,collegeId)
+
+       console.log(this.user.value)
+   
+        this.loggedIn.next(true)
+        this.router.navigate(['/employee']);
+
      }
      
     },

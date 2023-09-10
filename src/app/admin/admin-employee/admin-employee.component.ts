@@ -14,17 +14,9 @@ declare var $:any
 })
 export class AdminEmployeeComponent implements OnInit{
   constructor(private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute,private CookieService:CookieService){}
-  ngOnInit(): void {
-    this.collegeId = this.CookieService.get('collegeId')
-    this.showEmployee()
-    
-  }
+ 
   token =this.authService.user.value.token
-  addEmployee = new FormGroup({
-    name: new FormControl('',[Validators.required]),
-    email: new FormControl('',Validators.compose([Validators.required , Validators.email])),
-    password: new FormControl('',Validators.required),
-  })
+ 
   removeEmployeeIndex = -1
   UpdatEmployeeIndex!:any
   employeeData!:any
@@ -35,7 +27,19 @@ export class AdminEmployeeComponent implements OnInit{
   err!:any
   @ViewChild('editEmployeeSelect') editEmployeeSelect!: ElementRef;
   @ViewChild('removeEmployeeSelect') removeEmployeeSelect!: ElementRef;
- 
+
+
+  addEmployee = new FormGroup({
+    name: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required,Validators.email]),
+      password: new FormControl('',Validators.required),
+  })
+
+  updateEmployeeForm = new FormGroup({
+    name: new FormControl(null,),
+    email: new FormControl(null,Validators.email),
+    password: new FormControl(null),
+  })
   ngAfterContentChecked() {
    
     // to reset form when use close update modal
@@ -43,12 +47,16 @@ export class AdminEmployeeComponent implements OnInit{
     {
       console.log(this.employeeData)
       $('#updateEmploye').on('hidden.bs.modal',  (e: any) => {
-        this.addEmployee.reset();
+        this.updateEmployeeForm.reset();
         this.editEmployeeSelect.nativeElement.value = null;
     
     
       })
-    
+      $('#updateEmploye').on('show.bs.modal', () => {
+       
+        // Reset the <select> element to its initial value
+        this.editEmployeeSelect.nativeElement.value = null;
+    });
          
            $('#addEmployee').on('hidden.bs.modal',  (e: any) => {
               this.addEmployee.reset();
@@ -66,7 +74,12 @@ export class AdminEmployeeComponent implements OnInit{
 
 
   }
-
+  ngOnInit(): void {
+    this.authService.getCookies()
+    this.collegeId = this.CookieService.get('collegeId')
+    this.showEmployee()
+    
+  }
   
   createEmployee(value:any)
   {
@@ -105,7 +118,7 @@ export class AdminEmployeeComponent implements OnInit{
     
     err=>
     {
-      this.addEmployee.reset()
+      this.isLoading = false
       this.employeeData = undefined
       console.log(err)
     }
@@ -127,27 +140,31 @@ export class AdminEmployeeComponent implements OnInit{
     
     this.updateEmployee = this.employeeData.data.employees[SelectedIndex]
     console.log(this.updateEmployee)
-    this.addEmployee.patchValue({
-      name:this.updateEmployee.name,
-      email:this.updateEmployee.email,
-      // password:this.updateEmployee.password
-    })
+    // this.addEmployee.patchValue({
+    //   name:this.updateEmployee.name,
+    //   email:this.updateEmployee.email,
+    //   password:this.updateEmployee.password
+    // })
     
   }
 
 
   updateEmployees(){
+    console.log(this.updateEmployeeForm.value)
     const headers= new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     })
 
     const SelectEmployeId = this.employeeData.data.employees[this.UpdatEmployeeIndex].id
-    
-    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees/${SelectEmployeId}`,this.addEmployee.value,{headers}).subscribe(data=>
+      console.log(this.addEmployee.value)
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees/${SelectEmployeId}`,this.updateEmployeeForm.value,{headers}).subscribe(data=>
     {
       console.log(data)
-      this.showEmployee()
+    
+
       $('#updateEmploye').modal('hide')
+      this.showEmployee()
+     
       
     
     },

@@ -16,20 +16,27 @@ export class CreateAdminsComponent {
   editAdmin!:any
   UpdateAdmin!:any
   collageId!:any
-  token =this.authService.user.value.token
+  token !:any
   isLoading = true 
   colleges!:any
   admiins!:any
   err!:any
   
-  adminForm= new FormGroup(
+  addAdminForm= new FormGroup(
     {
-      name: new FormControl('',[Validators.required]),
-      email: new FormControl('',Validators.compose([Validators.required , Validators.email])),
+      name: new FormControl('',Validators.required),
+      email: new FormControl('',[Validators.required,Validators.email]),
       password: new FormControl('',Validators.required),
       // universityName: new FormControl('',[Validators.required])
     })
 
+    updateAdminForm= new FormGroup(
+      {
+        name: new FormControl(null,),
+        email: new FormControl(null,Validators.email),
+        password: new FormControl(null),
+        // universityName: new FormControl('',[Validators.required])
+      })
 
 
     @ViewChild('updateAdminSelect') updateAdminSelect!: ElementRef;
@@ -38,6 +45,9 @@ export class CreateAdminsComponent {
 
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   ngOnInit(): void {
+   this.authService.getCookies()
+   this.token =this.authService.user.value.token
+
     this.showAdmin()
   }
   ngAfterContentChecked()
@@ -46,27 +56,38 @@ export class CreateAdminsComponent {
     {
       setTimeout(() => {
         $('#addAdmin').on('hidden.bs.modal', () => {
-            this.adminForm.reset();
+            this.addAdminForm.reset();
+            this.updateAdminForm.reset();
             this.updateAdminSelect.nativeElement.value = null;
   
             // Reset the <select> element to its initial value
         });
   
         $('#updateAdmin').on('hidden.bs.modal', () => {
-            this.adminForm.reset();
-         
+            this.addAdminForm.reset();
+            this.updateAdminForm.reset();
             // Reset the <select> element to its initial value
             this.updateAdminSelect.nativeElement.value = null;
         });
-  
+        $('#updateAdmin').on('show.bs.modal', () => {
+       
+          // Reset the <select> element to its initial value
+          this.updateAdminSelect.nativeElement.value = null;
+      });
   
         $('#deleteAdmin').on('hidden.bs.modal', () => {
-          this.adminForm.reset();
-       
+          this.addAdminForm.reset();
+          this.updateAdminForm.reset();
           // Reset the <select> element to its initial value
           this.removeAdminSelect.nativeElement.value = null;
       });
-    }, 1000); // Delay for 1 second
+
+      $('#deleteAdmin').on('show.bs.modal', () => {
+     
+        // Reset the <select> element to its initial value
+        this.removeAdminSelect.nativeElement.value = null;
+    });
+    }, 1500); // Delay for 1 second
   
     }
   }
@@ -94,7 +115,7 @@ export class CreateAdminsComponent {
     {
       console.log(data)
       $('#addAdmin').modal('hide')
-
+      $('#updateAdmin').modal('hide')
       this.showAdmin()
     
     },
@@ -105,6 +126,7 @@ export class CreateAdminsComponent {
     )
   }
   showAdmin(){
+    
     const headers = new HttpHeaders({
       'Authorization' : `Bearer ${this.token}`
     })
@@ -113,14 +135,23 @@ export class CreateAdminsComponent {
       this.admiins = data
       this.isLoading = false
       this.err = undefined
+    
       
       
       
     },
     err=>{
-      this.err = err.error.message
-      // this.isLoading=true
-      this.admiins = undefined
+      if(err.error.message=='No admins found')
+      {
+        this.err = err.error.message
+        this.isLoading=false
+        this.admiins = undefined
+        console.log(this.err)
+      }else
+      {
+        console.log(this.err.error.message)
+      }
+    
     }
     )
   }
@@ -153,26 +184,28 @@ export class CreateAdminsComponent {
     
     this.editAdmin = this.admiins.data.admins[selectedIndex]
 
-    this.adminForm.patchValue({
-      name: this.editAdmin.name,
-      email:this.editAdmin.email,
-      password: this.editAdmin.password
+  //   this.adminForm.patchValue({
+  //     name: this.editAdmin.name,
+  //     email:this.editAdmin.email,
+  //     password: this.editAdmin.password
 
-   });
+  //  });
   }
  
   updateAdmins(){
+    console.log(this.updateAdminForm.value)
     const headers= new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     })
     this.collageId = this.route.snapshot.paramMap.get('id')
 
-    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,this.adminForm.value,{headers}).subscribe(data=>
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,this.updateAdminForm.value,{headers}).subscribe(data=>
     {
       console.log(data)
-      this.showAdmin()
       $('#updateAdmin').modal('hide')
-      this.updateAdminSelect.nativeElement.value = null;
+      this.showAdmin()
+   
+
     },
     err=>
     {
@@ -187,9 +220,10 @@ export class CreateAdminsComponent {
   }
 
    
-  onSubmit(){
-    console.log(this.adminForm.value)
-    this.createAdmin(this.adminForm.value)
+  onSubmitAdd(){
+ 
+
+    this.createAdmin(this.addAdminForm.value)
   }
   
 }

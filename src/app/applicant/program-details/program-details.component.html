@@ -1,62 +1,71 @@
-<div class="program-details mt-5">
+<div class="program-details mt-5" *ngIf="programDetails">
    <div class="mycontainer">
     <div class="program-header d-flex justify-content-start align-items-center">
         <img src="../../../assets/applicant/Vector.svg" alt="">
-        <h4 class="pt-1">دبلومة ادارة الاعمال</h4>
+        <h4 class="pt-1">{{programDetails.data.program.name}}  </h4>
     </div>
 
-    <div class="program-content">
+    <div class="program-content" >
 
         <div class="program-info">
             <h5>عن الدبلومة</h5>
-            <p class="mt-2">دبلومة إدارة الأعمال الدولية هي بوابتك نحو فهم عميق للعمليات التجارية العالمية
-                 وتطلعات السوق الدولية المتنوعة. يهدف هذا البرنامج إلى تزويدك بالمعرفة والمهارات الأساسية التي تؤهلك للنجاح في بيئة الأعمال العالمية المتغيرة. ستستفيد من منهجية تعليمية حديثة ومندمجة تجمع بين النظريات الأكاديمية والتطبيق العملي.</p>
+            <p class="mt-2"> 
+                {{programDetails.data.program.description}}
+            </p>
         </div>
 
-        <div class="requirements">
-            <h5>متطلبات القبول</h5>
-            <ul>
-                <li class="mt-2">حاصل على شهادة البكالوريوس في أي تخصص ذي صلة.</li>
-                <li  class="mt-2">سجل أكاديمي جيد.</li>
-                <li  class="mt-2">جادة اللغة الإنجليزية مثبتة من خلال اختبارات معترف بها (TOEFL أو IELTS)</li>
-                <li  class="mt-2">رسالة توصية من أستاذ سابق أو مشرف أكاديمي.</li>
-                <li  class="mt-2">مقابلة شخصية لتقييم المهارات والمؤهلات.</li>
-               
-            </ul>
-        </div>
+        
 
         <div class="program-fees">
             <h5>رسوم البرنامج</h5>
             <ul>
-                <li  class="mt-2">رسوم التقديم: 500 جنيه مصري (غير قابلة للاسترداد).</li>
-                <li  class="mt-2">رسوم الدراسة: 15,000 جنيه مصري لكل فصل دراسي.</li>
+                <li  class="mt-2">رسوم التقديم: {{programDetails.data.program.applying_fees}} جنيه مصري (غير قابلة للاسترداد).</li>
+                <li  class="mt-2">رسوم الدراسة: {{programDetails.data.program.program_fees}} جنيه مصري لكل فصل دراسي.</li>
+                <li class="mt-2"> عدد الساعات المعتمده في البرنامج: {{programDetails.data.program.credit_hour_fees}} ساعه</li>
+
                 <li  class="mt-2">رسوم الكتب والمواد: تتفاوت حسب المقررات والمتطلبات.</li>
 
 
             </ul>
         </div>
 
+
+
+        <div class="requirements" >
+            <h5>متطلبات القبول</h5>
+            <ul *ngIf="programFiles">
+                <li class="mt-2" *ngFor="let file of this.programFiles.data.programFiles "> 
+                    {{file.name}} ({{file.type}})
+                </li>
+            
+            
+            </ul>
+        </div>
+
+
+
+
         <div class="program-duration d-flex justify-content-between">
            <div>
-                <h5>مدة البرنامج</h5>
+                <h5> تاريخ التقديم</h5>
                 <ul>
-                    <li class="mt-2">عامين دراسيين </li>
-                    <li class="mt-2">أربعة فصول دراسية.</li>
+                    <li class="mt-2"> من : {{formattedSDate}}</li>
+                    <li class="mt-2">الي : {{formattedEDate}} </li>
                 </ul>
            </div>
 
 
            <!--------------- if applicant--------->
-           <!-- <div class="register">
+           <div class="register" *ngIf="userRole == 'applicant'">
                 <button class="btn " (click)="openApplication()">سجل الان</button>
-           </div> -->
+           </div>
 
 
            <!---------------------------if employee-- -------------->
 
-            <div class="register">
+            <!-- <div class="register" *ngIf="userRole == 'employee'">
                 <button class="btn" (click)="showApplicantsReq()">الطلبه المتقدمون</button>
-            </div>
+            </div> -->
 
         </div>
 
