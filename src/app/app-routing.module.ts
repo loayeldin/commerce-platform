@@ -24,6 +24,9 @@ import { AdminProgramDetailsComponent } from './admin/admin-program-details/admi
 import { AuthGuard } from './auth.guard';
 import { AllApplicationsComponent } from './applicant/all-applications/all-applications.component';
 import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
+import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
+import { DeplomsComponent } from './employee/deploms/deploms.component';
+
 
 
 
@@ -48,10 +51,11 @@ const routes: Routes = [
   ]},
 
   {path:'employee', component:EmployeeComponent,children:[
-    {path:'',redirectTo:'showStudents',pathMatch:'full'},
- 
-    {path:'showStudents', component:ShowStudentsComponent},
-    { path:'showStudents/:id', component:StudentReqDataComponent}
+    {path:'',redirectTo:'empHome',pathMatch:'full'},
+    {path:'empHome', component:EmployeeHomeComponent},
+    {path:'empHome/:id', component:DeplomsComponent},
+    {path:'empHome/:id/showStudents', component:ShowStudentsComponent},
+    {path:'empHome/:id/showStudents/:studentId', component:StudentReqDataComponent}
 
   ]},
 

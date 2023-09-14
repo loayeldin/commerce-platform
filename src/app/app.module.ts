@@ -37,6 +37,9 @@ import { AdminProgramDetailsComponent } from './admin/admin-program-details/admi
 import { AddAdminComponent } from './admin-employee/add-admin/add-admin.component';
 import { AllApplicationsComponent } from './applicant/all-applications/all-applications.component';
 import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
+import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
+import { DeplomsComponent } from './employee/deploms/deploms.component';
+
 
 
 
@@ -76,6 +79,9 @@ import { ApplicationDetailsComponent } from './applicant/application-details/app
          AdminProgramDetailsComponent,
          AllApplicationsComponent,
          ApplicationDetailsComponent,
+         EmployeeHomeComponent,
+         DeplomsComponent,
+        
         
         
      
