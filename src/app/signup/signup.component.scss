@@ -6,7 +6,7 @@
 }
 
 .application{
-    height: 700px;
+    min-height: 700px;
     width: 35%;
     background: #FFF;
 
@@ -24,7 +24,17 @@ padding: 10px 16px;
 cursor: pointer;
 
 }
+.error-container
+{
+    margin-top: 5px;
+    
+// width: 450px;
+width: 75%;
+height: 50px;
+padding: 10px 16px;
+cursor: pointer;
 
+}
 input::placeholder
 {
     color: var(--placeholder, #7F7C7E);
