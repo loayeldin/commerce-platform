@@ -49,6 +49,18 @@ export class AuthService {
     )
   }
 
+  signUpApplicant (form:any)  
+  {
+    return this.http.post('https://commerce-api-dev.onrender.com/api/v1/auth/signup-applicant/',form).subscribe(data=>
+    {
+      console.log(data)
+      this.router.navigate(['/login'])
+    },
+    err=>{
+      console.log(err);
+      
+    })
+  }
   private handleLogin(resData:any)
   {
   

@@ -17,7 +17,7 @@
             <div class="row d-flex justify-content-between">
               <div class="col-md-5" *ngFor="let application of applicationsData.data.applications; let i = index" (click)="studentInfo(i)">
                 <div class="rectangle mt-4">
-                  <h4>{{ application.applicant_id }}</h4>
+                  <h4>{{ application.name }}</h4>
                   <b>رقم قومي : {{ application.id }}</b>
                 </div>
               </div>
