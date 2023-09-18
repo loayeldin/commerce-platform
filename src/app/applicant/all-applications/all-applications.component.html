@@ -70,14 +70,14 @@
 
             <div  class="diploma  col-md-4 mt-4 " *ngFor="let application of applications.data.applications ; let i = index" (click)="openApplicationDetails(i)" data-toggle="modal" data-target="#showDetails">
                 <div class="rectangle-diploma-shape">
-                    <h5>{{application.name}}</h5>
+                    <h5>{{application.program_name}}</h5>
                 
-                    <div class="date mt-3">الحاله: {{application.status}} </div>
-                    <div class="price mt-2">  تم انشاء الطلب في :{{application.created_at}} </div>
+                    <div class="date mt-4">الحاله: {{application.status}} </div>
+                    <!-- <div class="price mt-2">  تم انشاء الطلب في :{{application.created_at}} </div>
 
-                     <div class="date mt-3">   تم تحديث الطلب في: {{application.updated_at}}</div>
+                     <div class="date mt-3">   تم تحديث الطلب في: {{application.updated_at}}</div> -->
 
-                    <button class="read-more" type="button"  style="cursor: pointer;"> المزيد</button>
+                    <button class="read-more mt-5" type="button"  style="cursor: pointer;"> المزيد</button>
                 </div>
 
             </div>
@@ -123,7 +123,21 @@
 
             <form class="form-content mt-4"  *ngIf="selectedAppDetials">
 
-                <div class="row d-flex align-items-center ">
+
+                <div class="row d-flex align-items-center mt-4">
+                    <header class="col-lg-3  ">  اسم الطالب </header>
+                    
+                    <div class="col-lg-5">
+                       
+                            <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.name" disabled>
+                       
+                    </div>
+                </div>
+
+
+
+
+                <div class="row d-flex align-items-center mt-4 ">
                     <header class="col-lg-3  "> الحاله</header>
                     
                     <div class="col-lg-5">
