@@ -211,6 +211,11 @@ export class AdminProgramDetailsComponent {
   
     }
 
-    
+    navigateToParentComponent()
+    {
+      this.router.navigate(['../'], { relativeTo: this.route });
+      console.log(this.route)
+    }
+
   
 }

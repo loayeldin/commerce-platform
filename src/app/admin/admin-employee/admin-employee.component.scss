@@ -23,7 +23,7 @@
 }
 .rectangle-employee-shape
 {
-    background: var(--White, #d4d4d4);
+    background: var(--White, #fdfcfc);
     padding: 30px;
     
     min-height: 185px;
@@ -48,6 +48,16 @@
     font-size: 28px;
 
     font-weight: 500;
+
+}
+
+.rectangle-employee-shape .date ,.price
+{
+    color: var(--Placeholder, #7F7C7E);
+  
+   
+    font-size: 18px;
+ 
 
 }
 .btn

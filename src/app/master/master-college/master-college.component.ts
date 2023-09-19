@@ -122,6 +122,7 @@ export class MasterCollegeComponent {
       {
         this.err = err.error.message
         this.collegesLoad=true
+        this.colleges = undefined
         
       })
       
@@ -147,7 +148,7 @@ export class MasterCollegeComponent {
       },
       err=>
       {
-        console.log(err)
+        console.log(err.message)
       })
   
     }

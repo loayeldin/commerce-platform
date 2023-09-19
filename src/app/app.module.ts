@@ -39,6 +39,7 @@ import { AllApplicationsComponent } from './applicant/all-applications/all-appli
 import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
 import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
 import { DeplomsComponent } from './employee/deploms/deploms.component';
+import { DateFormatPipe } from './date-format.pipe';
 
 
 
@@ -82,7 +83,8 @@ import { DeplomsComponent } from './employee/deploms/deploms.component';
          EmployeeHomeComponent,
          DeplomsComponent,
         
-        
+         DateFormatPipe, // Add your custom pipe to the declarations array
+
         
      
 

@@ -18,7 +18,7 @@ export class SignupComponent {
       Validators.required,
       Validators.minLength(8), // Minimum length of 8 characters
       Validators.maxLength(15), // Maximum length of 15 characters
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]+$/), // Requires at least one letter and one number
+      // Requires at least one letter and one number
     ]),
     national_id: new FormControl('',[Validators.required,  Validators.pattern(/^[0-9]{14}$/)]),
     gender: new FormControl('',[Validators.required])

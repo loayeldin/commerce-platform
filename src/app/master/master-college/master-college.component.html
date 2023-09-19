@@ -43,10 +43,14 @@
             <!--loading spinner-->
 
 
-
+            <div  *ngIf="collegesLoad && !colleges" class="mt-5">
+              <h3>
+                  لا يوجد كليات
+              </h3>  
+            </div>
            
      
-       <div class="row mt-5" *ngIf="collegesLoad">
+       <div class="row mt-5" *ngIf="collegesLoad && colleges">
 
         
 
@@ -64,8 +68,8 @@
                     <h5>{{colleges.name}}</h5>
                     <h6 class="mt-4">{{colleges.university_name}}</h6>
 
-                    <div class="date mt-3">{{colleges.created_at}}</div>
-                    <div class="price mt-2">{{colleges.updated_at}}</div>
+                    <div class="date mt-3">تم الانشاء في : {{colleges.created_at | dateFormat}}</div>
+                    <div class="price mt-2">تم التحديث في : {{colleges.updated_at | dateFormat}}</div>
                     
                 </div>
 
@@ -179,7 +183,7 @@
 
   
 
-  <div class="modal fade" id="deleteCollege" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="collegesLoad">
+  <div class="modal fade" id="deleteCollege" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" *ngIf="collegesLoad && colleges">
     <div class="modal-dialog modal-dialog-centered modal-arabic" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -232,99 +236,100 @@
 
 
 
-   <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+   <div class="modal fade" id="updateCollege"  #updateCollegeModal tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="collegesLoad && colleges">
 
-    <div class="modal-dialog modal-arabic  modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header d-flex justify-content-between">
-          <h5 class="modal-title" id="exampleModalLabel">تحديث بيانات كليه</h5>
-         
+      <div class="modal-dialog modal-arabic  modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header d-flex justify-content-between">
+            <h5 class="modal-title" id="exampleModalLabel">تحديث بيانات كليه</h5>
+          
 
-          <div data-dismiss="modal" aria-label="Close" style="font-size: 25px; cursor: pointer;">X</div>
+            <div data-dismiss="modal" aria-label="Close" style="font-size: 25px; cursor: pointer;">X</div>
 
-        </div>
+          </div>
 
 
 
-        <div class="modal-body p-5">
+          <div class="modal-body p-5">
 
-          <div class="input-container" *ngIf="collegesLoad">
-               
-            <!-- <select id="college"
-                class="form-control"
-            
-              name="collegeToUpdate" 
+            <div class="input-container" *ngIf="collegesLoad">
+                
+              <!-- <select id="college"
+                  class="form-control"
+              
+                name="collegeToUpdate" 
+                required
+                [(ngModel)]="collegeUpdateIndex"
+                (ngModelChange)="onCollegeSelectionChange($event)"
+                >
+                <option disabled> اختر</option>
+                <option   *ngFor="let colleges of colleges.data.collages ; let i = index" [value]="i">{{colleges.name}}</option>
+                
+              </select> -->
+
+              <select
+              id="college"
+              class="form-control"
+              name="collegeToUpdate"
               required
               [(ngModel)]="collegeUpdateIndex"
               (ngModelChange)="onCollegeSelectionChange($event)"
-              >
-              <option disabled> اختر</option>
-              <option   *ngFor="let colleges of colleges.data.collages ; let i = index" [value]="i">{{colleges.name}}</option>
-              
-            </select> -->
+              #editCollegeSelect
+            >
+              <option *ngFor="let colleges of colleges.data.collages; let i = index" [value]="i">{{colleges.name}}</option>
+            </select>
+            
+            
+            </div>
 
-            <select
-            id="college"
-            class="form-control"
-            name="collegeToUpdate"
-            required
-            [(ngModel)]="collegeUpdateIndex"
-            (ngModelChange)="onCollegeSelectionChange($event)"
-            #editCollegeSelect
-          >
-            <option *ngFor="let colleges of colleges.data.collages; let i = index" [value]="i">{{colleges.name}}</option>
-          </select>
-          
-          
+
+
+
+              <form class="form-content mt-4" [formGroup]="collegeForm" (ngSubmit)="updateCollege()">
+
+                  <div class="row d-flex align-items-center">
+                      <header class="col-lg-3  ">اسم الكليه</header>
+                      
+                      <div class="col-lg-5">
+                        
+                              <input type="text" class="form-control" formControlName="name">
+                        
+                      </div>
+                  </div>
+      
+
+
+                  <div class="row d-flex align-items-center mt-4">
+                      <header class="col-lg-3  ">اسم الجامعه</header>
+                      
+                      <div class="col-lg-5">
+                        
+                              <input type="text" class="form-control"  formControlName="universityName">
+                        
+                      </div>
+                  </div>
+      
+
+      
+      
+
+                  <div class="d-flex justify-content-center align-items-center mt-4">
+
+                      <button type="submit" class="btn add-btn  ml-3" [disabled]="collegeForm.invalid">تحديث</button>
+                  </div>
+                  
+              </form>
+            
           </div>
 
 
 
 
-            <form class="form-content mt-4" [formGroup]="collegeForm" (ngSubmit)="updateCollege()">
-
-                <div class="row d-flex align-items-center">
-                    <header class="col-lg-3  ">اسم الكليه</header>
-                    
-                    <div class="col-lg-5">
-                       
-                            <input type="text" class="form-control" formControlName="name">
-                       
-                    </div>
-                </div>
-    
-
-
-                <div class="row d-flex align-items-center mt-4">
-                    <header class="col-lg-3  ">اسم الجامعه</header>
-                    
-                    <div class="col-lg-5">
-                       
-                            <input type="text" class="form-control"  formControlName="universityName">
-                       
-                    </div>
-                </div>
-    
-
-    
-    
-
-                <div class="d-flex justify-content-center align-items-center mt-4">
-
-                    <button type="submit" class="btn add-btn  ml-3" [disabled]="collegeForm.invalid">تحديث</button>
-                </div>
-                
-            </form>
-          
+      
         </div>
 
-
-
-
-     
       </div>
-
-    </div>
+  </div>
 
 
 

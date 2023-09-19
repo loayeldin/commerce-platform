@@ -34,12 +34,11 @@ import { DeplomsComponent } from './employee/deploms/deploms.component';
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
    {path:'home',component:HomePageComponent},
-  {path:'login',component:LoginComponent,},
-  {path:'myprofile',component:MyprofileComponent,},
-  {path:'signup',component:SignupComponent},
+  {path:'login',component:LoginComponent,canActivate: [AuthGuard],},
+  {path:'myprofile',component:MyprofileComponent,canActivate: [AuthGuard],},
+  {path:'signup',component:SignupComponent,canActivate: [AuthGuard],},
 
-
-  {path:'applicant',component:ApplicantComponent,children:[
+  {path:'applicant',component:ApplicantComponent,canActivate: [AuthGuard],children:[
     {path:'',redirectTo:'program-list', pathMatch:'full'},
     {path:'program-list',component:ProgramListComponent},
     {path:'program-list/:id',component:ProgramDetailsComponent},
@@ -50,7 +49,7 @@ const routes: Routes = [
     {path:'MyApplications/:id', component:ApplicationDetailsComponent}
   ]},
 
-  {path:'employee', component:EmployeeComponent,children:[
+  {path:'employee', component:EmployeeComponent,canActivate: [AuthGuard], children:[
     {path:'',redirectTo:'empHome',pathMatch:'full'},
     {path:'empHome', component:EmployeeHomeComponent},
     {path:'empHome/:id', component:DeplomsComponent},
@@ -59,7 +58,7 @@ const routes: Routes = [
 
   ]},
 
-  {path:'admin', component:AdminComponent,children:[
+  {path:'admin', component:AdminComponent,canActivate: [AuthGuard],children:[
     {path:'' ,redirectTo:'home',pathMatch:'full'},
     {path:'home',component:AdminHomeComponent},
     {path:'programs',component:AdminProgramComponent},
@@ -69,7 +68,7 @@ const routes: Routes = [
   ]},
 
 
-  {path:'master', component:MasterComponent,children:[
+  {path:'master', component:MasterComponent,canActivate: [AuthGuard],children:[
     {path:'' ,redirectTo:'home',pathMatch:'full'},
     {path:'home',component:MasterHomeComponent},
     {path:'college',component:MasterCollegeComponent},

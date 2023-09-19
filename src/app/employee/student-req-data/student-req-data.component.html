@@ -7,7 +7,7 @@
             </div>         
         </header>
         <div>
-        <div class="data-content mt-4" >
+        <div class="data-content mt-4"  *ngIf="applicationData">
 
             <div class="row d-flex align-items-center">
                 <header class="col-lg-2 col-md-3">الاسم بالكامل: </header>
@@ -39,13 +39,51 @@
 
 
             <div class="row d-flex align-items-center mt-4">
-                <header class="col-lg-2 col-md-3">الموقف من التجنيد :</header>
+                <header class="col-lg-2 col-md-3">مراجعه الطلب:</header>
                 <div class="col-md-8">
                     <div class="input-container">
                         <span class="text-style">{{applicationData.data.application.status}}</span>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="row d-flex align-items-center mt-4">
+                <header class="col-lg-2 col-md-3"> حاله دفع رسوم الدبلومه:</header>
+                <div class="col-md-8">
+                    <div class="input-container">
+                        <span class="text-style">{{applicationData.data.application.program_fees_status }}</span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row d-flex align-items-center mt-4">
+                <header class="col-lg-2 col-md-3"> حاله دفع رسوم التقديم:</header>
+                <div class="col-md-8">
+                    <div class="input-container">
+                        <span class="text-style">{{applicationData.data.application.applying_fees_status}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row d-flex align-items-center mt-4">
+                <header class="col-lg-2 col-md-3">   ملاحظات :</header>
+                <div class="col-md-8">
+                    <textarea name="" id="" cols="60" rows="6"></textarea>
+
+                </div>
+            </div>
+
+
+
+
+
             <div class="row d-flex align-items-center mt-4" *ngFor="let file of applicationData.data.files">
                 <header class="col-lg-2 col-md-3">{{file.original_name}} : </header>
                 <div class="col-md-8">
@@ -64,16 +102,12 @@
             <div class="row mt-5">
 
               <div class="col-sm-4">
-                <button class="btn accept-btn "> مقبول</button>
+                <button class="btn accept-btn "> تحديث</button>
               </div>
 
-              <div class="col-sm-4">
-                <button class="btn Notfulfilled-btn  "> غير مستوفي</button>
-              </div>
+            
 
-              <div class="col-sm-4 ">
-                <button class="btn rejected-btn">  مرفوض</button>
-              </div>
+             
 
             </div>
 

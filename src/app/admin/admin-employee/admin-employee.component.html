@@ -54,11 +54,12 @@
 
 
 
-            <div  class="employee  col-md-6 mt-4 " *ngFor="let employe of employeeData.data.employees ; let i = index" >
-                <div class="rectangle-employee-shape">
+            <div  class="employee  col-md-4 mt-4 " *ngFor="let employe of employeeData.data.employees ; let i = index" >
+                <div class="rectangle-employee-shape text-center">
                     <h5>{{employe.name}}</h5>
-                    <p>البريد الالكتروني: <span> {{employe.email}}</span></p>
-                    
+                    <p class="mt-4">البريد الالكتروني: <span> {{employe.email}}</span></p>
+                    <div class="date mt-3">تم الانشاء في : {{employe.created_at | dateFormat}}</div>
+                    <div class="price mt-2">تم التحديث في : {{employe.updated_at | dateFormat}}</div>
                 </div>
 
             </div> 

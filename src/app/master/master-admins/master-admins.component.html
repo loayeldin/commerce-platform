@@ -12,10 +12,14 @@
             <!--loading spinner-->
 
 
-
+            <div  *ngIf="collegesLoad && !colleges" class="mt-5">
+              <h3>
+                  لا يوجد كليات
+              </h3>  
+            </div>
            
      
-       <div class="row mt-5" *ngIf="collegesLoad">
+       <div class="row mt-5" *ngIf="collegesLoad && colleges ">
 
         
 
@@ -29,8 +33,8 @@
                     <h5>{{colleges.name}}</h5>
                     <h6 class="mt-4">{{colleges.university_name}}</h6>
 
-                    <div class="date mt-3">{{colleges.created_at}}</div>
-                    <div class="price mt-2">{{colleges.updated_at}}</div>
+                    <div class="date mt-3">تم الانشاء في : {{colleges.created_at | dateFormat}}</div>
+                    <div class="price mt-2">تم التحديث في : {{colleges.updated_at | dateFormat}}</div>
                     
                 </div>
 

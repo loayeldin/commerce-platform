@@ -55,6 +55,7 @@ export class ShowStudentsComponent {
     })
     
     const programsId =  this.route.snapshot.paramMap.get('id')
+    console.log(this.collegeId,programsId)
     return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications`, {headers}).subscribe(data=>{
       console.log(data);
       

@@ -61,7 +61,8 @@
                     <h5>{{admins.name}}</h5>
                     <h6 class="mt-4">{{admins.email}}</h6>
 
-                    <div class="date mt-3">{{admins.password}}</div>
+                    <div class="date mt-3">تم الانشاء في : {{admins.created_at | dateFormat}}</div>
+                    <div class="price mt-2">تم التحديث في : {{admins.updated_at | dateFormat}}</div>
                     
                     
                 </div>
