@@ -1,4 +1,4 @@
-<div class="student-data">
+<div class="student-data py-3">
     <div class="mycontainer">
         <header class="d-flex justify-content-between align-items-center mt-5">
             <div class="data-header d-flex justify-content-start align-items-center">
@@ -21,65 +21,6 @@
 
 
 
-            <div class="row d-flex align-items-center mt-4 ">
-                <header class="col-lg-2 col-md-3">الرقم القومي :</header>
-               
-                <div class="col-md-8">
-                    <div class="input-container">
-                        <span class="text-style">{{applicationData.data.application.id}}</span>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-            <div class="row d-flex align-items-center mt-4">
-                <header class="col-lg-2 col-md-3">مراجعه الطلب:</header>
-                <div class="col-md-8">
-                    <div class="input-container">
-                        <span class="text-style">{{applicationData.data.application.status}}</span>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="row d-flex align-items-center mt-4">
-                <header class="col-lg-2 col-md-3"> حاله دفع رسوم الدبلومه:</header>
-                <div class="col-md-8">
-                    <div class="input-container">
-                        <span class="text-style">{{applicationData.data.application.program_fees_status }}</span>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="row d-flex align-items-center mt-4">
-                <header class="col-lg-2 col-md-3"> حاله دفع رسوم التقديم:</header>
-                <div class="col-md-8">
-                    <div class="input-container">
-                        <span class="text-style">{{applicationData.data.application.applying_fees_status}}</span>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row d-flex align-items-center mt-4">
-                <header class="col-lg-2 col-md-3">   ملاحظات :</header>
-                <div class="col-md-8">
-                    <textarea name="" id="" cols="60" rows="6"></textarea>
-
-                </div>
-            </div>
-
 
 
 
@@ -99,10 +40,76 @@
 
 
 
+            
+               <form [formGroup]="updateAppForm" (ngSubmit)="updateApplication()">
+                <div class="row d-flex align-items-center mt-4">
+                    <header class="col-lg-2 col-md-3">مراجعه الطلب:</header>
+                    <div class="col-md-8">
+                      
+                        <select formControlName="status" class="input-container">
+                            <option disabled selected [value]="applicationData.data.application.status">{{applicationData.data.application.status}}</option>
+                            <option *ngIf="applicationData.data.application.status !=='pending'" value="pending">pending</option>
+                            <option *ngIf="applicationData.data.application.status !=='reviewed'" value="reviewed">reviewed</option>
+                          <option *ngIf="applicationData.data.application.status !== 'first acceptance'" value="first acceptance">first acceptance</option>
+                          
+                          <option *ngIf="applicationData.data.application.status !== 'final acceptance'" value="final acceptance">final acceptance</option>
+                        </select>
+                      
+                    </div>
+                  </div>
+                  
+    
+    
+    
+                <div class="row d-flex align-items-center mt-4">
+                    <header class="col-lg-2 col-md-3"> حاله دفع رسوم الدبلومه:</header>
+                    <div class="col-md-8">
+                        
+                            <select class="text-style w-100" class="input-container"  name="feesStatusSelector" formControlName="program_fees_status">
+                                <option  disabled selected [value]="applicationData.data.application.program_fees_status">{{applicationData.data.application.program_fees_status}}</option>
+                                <option  *ngIf="applicationData.data.application.program_fees_status != true" value="true">true</option>
+                                <option  *ngIf="applicationData.data.application.program_fees_status != false" value="false">false</option>
+                            </select>
+                        
+                    </div>
+                </div>
+    
+    
+    
+    
+    
+                <div class="row d-flex align-items-center mt-4">
+                    <header class="col-lg-2 col-md-3">حاله دفع رسوم التقديم:</header>
+                    <div class="col-md-8">
+                        
+                            <select class="text-style w-100" class="input-container" name="feesStatusSelector" formControlName="applying_fees_status">
+                                <option  disabled selected [value]="applicationData.data.application.applying_fees_status">{{applicationData.data.application.applying_fees_status}}</option>
+                                <option  *ngIf="applicationData.data.application.applying_fees_status != true" value="true">true</option>
+                                <option  *ngIf="applicationData.data.application.applying_fees_status != false" value="false">false</option>
+                            </select>
+                       
+                    </div>
+                </div>
+                
+                
+                
+    
+    
+                <div class="row d-flex align-items-center mt-4">
+                    <header class="col-lg-2 col-md-3">   ملاحظات :</header>
+                    <div class="col-md-8">
+                        <textarea name="" id="" cols="60" rows="6" formControlName="feedback">{{applicationData.data.application.feedback}}</textarea>
+    
+                    </div>
+                </div>
+            
+
+
+
             <div class="row mt-5">
 
               <div class="col-sm-4">
-                <button class="btn accept-btn "> تحديث</button>
+                <button class="btn accept-btn " type="submit" [disabled]="updateAppForm.invalid"> تحديث</button>
               </div>
 
             
@@ -110,6 +117,7 @@
              
 
             </div>
+               </form>
 
             
         </div>
