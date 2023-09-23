@@ -34,7 +34,7 @@ export class CreateAdminsComponent {
       {
         name: new FormControl(null,),
         email: new FormControl(null,Validators.email),
-        password: new FormControl(''),
+        password: new FormControl(null),
         // universityName: new FormControl('',[Validators.required])
       })
 
@@ -199,14 +199,14 @@ export class CreateAdminsComponent {
     })
     this.collageId = this.route.snapshot.paramMap.get('id')
 
-    // const formValues = this.updateAdminForm.getRawValue();
-    // console.log(formValues)
+    const formValues = this.updateAdminForm.getRawValue();
+    console.log(formValues)
 
     // Filter out the form controls with null values
-    // const filledFormValues = Object.entries(formValues)
-    //   .filter(([key, value]) => value !== null)
-    //   .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-    //   console.log(filledFormValues)
+    const filledFormValues = Object.entries(formValues)
+      .filter(([key, value]) => value !== null)
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+      console.log(filledFormValues)
 
 
     return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,this.updateAdminForm.value,{headers}).subscribe(data=>

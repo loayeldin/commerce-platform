@@ -18,6 +18,7 @@ export class AuthService {
   masterProifle!:any
   applicantProfile!:any
   employeeProfile!:any
+  tokenExpirationTimer!:any
 
   constructor(private http:HttpClient ,private router:Router,private CookieService:CookieService) { }
 
@@ -132,6 +133,7 @@ export class AuthService {
       console.log('yes')
       const newUser = new User(this.CookieService.get('id'),this.CookieService.get('token'),this.CookieService.get('role'),this.CookieService.get('name'))
       this.user.next(newUser)
+    
       console.log(this.user.value)
     }
     else
@@ -161,7 +163,26 @@ export class AuthService {
     this.loggedIn.next(false)
   
   }
+ 
 
+
+
+  // startAutoLogout(minutes: number): void {
+  //   const expirationTime = this.CookieService.get('expiration');
+  
+  //   if (!expirationTime || new Date().getTime() > +expirationTime) {
+  //     // Calculate the new expiration time
+  //     const newExpirationTime = new Date().getTime() + minutes * 60 * 1000;
+  //     this.CookieService.set('expiration', newExpirationTime.toString());
+  
+  //     this.tokenExpirationTimer = setTimeout(() => {
+  //       // Implement your logout logic here
+  //       console.log('logouted')
+  //     }, minutes * 60 * 1000); // Convert minutes to milliseconds
+
+  //     console.log(this.tokenExpirationTimer)
+  //   }
+  // }
 
   getMyProfile(token:any,userRole:any,userId:any)
   {
@@ -184,9 +205,10 @@ export class AuthService {
         this.user.next(newUser)
   
   
-       
+        
   
        this.setCookies(token,userId,userRole,this.userName,null) // no need to fourth paramter there
+       
        console.log(this.user.value)
    
         this.loggedIn.next(true)

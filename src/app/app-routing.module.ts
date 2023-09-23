@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ApplicantComponent } from './applicant/applicant.component';
@@ -26,6 +26,7 @@ import { AllApplicationsComponent } from './applicant/all-applications/all-appli
 import { ApplicationDetailsComponent } from './applicant/application-details/application-details.component';
 import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
 import { DeplomsComponent } from './employee/deploms/deploms.component';
+import { MasterModule } from './master/master.module';
 
 
 
@@ -33,56 +34,73 @@ import { DeplomsComponent } from './employee/deploms/deploms.component';
 
 const routes: Routes = [
    {path:'',redirectTo:'/home', pathMatch:'full'},
-   {path:'home',component:HomePageComponent},
-  {path:'login',component:LoginComponent,canActivate: [AuthGuard],},
-  {path:'myprofile',component:MyprofileComponent,canActivate: [AuthGuard],},
-  {path:'signup',component:SignupComponent,canActivate: [AuthGuard],},
 
-  {path:'applicant',component:ApplicantComponent,canActivate: [AuthGuard],children:[
-    {path:'',redirectTo:'program-list', pathMatch:'full'},
-    {path:'program-list',component:ProgramListComponent},
-    {path:'program-list/:id',component:ProgramDetailsComponent},
-    {path:'program-list/:id/program-application',component:ProgramApplicationComponent},
+  {path:'home',
+  loadChildren: ()=> import('./home-page/home.module')
+  .then(m=>m.HomeModule)
+ },
+ 
 
 
-    {path:'MyApplications', component:AllApplicationsComponent},
-    {path:'MyApplications/:id', component:ApplicationDetailsComponent}
-  ]},
+  {path:'login',
+  loadChildren: ()=> import('./login/login.module')
+  .then(m=>m.LoginModule)
+ },
+ 
+ 
+ 
 
-  {path:'employee', component:EmployeeComponent,canActivate: [AuthGuard], children:[
-    {path:'',redirectTo:'empHome',pathMatch:'full'},
-    {path:'empHome', component:EmployeeHomeComponent},
-    {path:'empHome/:id', component:DeplomsComponent},
-    {path:'empHome/:id/showStudents', component:ShowStudentsComponent},
-    {path:'empHome/:id/showStudents/:studentId', component:StudentReqDataComponent}
-
-  ]},
-
-  {path:'admin', component:AdminComponent,canActivate: [AuthGuard],children:[
-    {path:'' ,redirectTo:'home',pathMatch:'full'},
-    {path:'home',component:AdminHomeComponent},
-    {path:'programs',component:AdminProgramComponent},
-    {path:'programs/:id',component:AdminProgramDetailsComponent},
-    {path:'employee',component:AdminEmployeeComponent},
-
-  ]},
+  {path:'myprofile',
+  loadChildren: ()=> import('./myprofile/myprofile.module')
+  .then(m=>m.myprofileModule)
+ },
 
 
-  {path:'master', component:MasterComponent,canActivate: [AuthGuard],children:[
-    {path:'' ,redirectTo:'home',pathMatch:'full'},
-    {path:'home',component:MasterHomeComponent},
-    {path:'college',component:MasterCollegeComponent},
-    {path:'admins',component:MasterAdminsComponent},
-    {path:'admins/:id',component:CreateAdminsComponent}
 
-    
 
-  ]}
+
+
+
+  {path:'signup',
+  loadChildren: ()=> import('./signup/signup.module')
+  .then(m=>m.signupModule)
+ },
+
+
+
+
+
+
+  
+  {path:'applicant',
+  loadChildren: ()=> import('./applicant/applicant.module')
+  .then(m=>m.ApplicantModule)
+ },
+
+ 
+
+  {path:'employee',
+  loadChildren: ()=> import('./employee/employee.module')
+  .then(m=>m.EmployeeModule)
+ },
+ 
+
+  {path:'admin',
+  loadChildren: ()=> import('./admin/admin.module')
+  .then(m=>m.AdminModule)
+ },
+
+
+  {path:'master',
+   loadChildren: ()=> import('./master/master.module')
+   .then(m=>m.MasterModule)
+  }
+
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{preloadingStrategy:PreloadAllModules})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
