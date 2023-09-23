@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import {CookieService} from 'ngx-cookie-service'
-import { Subscription, windowWhen } from 'rxjs';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 interface CustomFile {
   name: string;
   selectedFile: File;
@@ -38,8 +38,8 @@ selectedFileValues: { [key: string]: string } = {}; // to show the selected valu
   filesToUpload!:any
   applicationData!:any
 
-
-
+isLoading = false
+buttonLabel: string = 'ارسال';
   allUpload=false
 ngOnInit()
 {
@@ -84,6 +84,7 @@ ngOnInit()
   {
     console.log(data)
     this.programFiles = data
+    
 
    //this.programFiles.data.programFiles
   },
@@ -135,7 +136,7 @@ onFileSelected(event: any, file: any) {
 
 
 onFormSubmit()  {
-
+  this.isLoading = true
   let headers= new HttpHeaders({
     'Authorization': `Bearer ${this.token}`
   })
@@ -151,7 +152,7 @@ onFormSubmit()  {
     this.applicationData = data
     this.filesToUpload = this.applicationData.data.filesToUpload
     
-
+   
     this.handle()
 
 
@@ -222,6 +223,8 @@ handle()
             
                     // Check if this is the last iteration of the loop
             if (file === this.filesToUpload[this.filesToUpload.length - 1]) {
+
+              this.isLoading = false
               // Navigate the user after the loop has completed
               this.router.navigate(['/applicant/MyApplications'])
               console.log('all end')

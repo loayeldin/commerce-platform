@@ -5,7 +5,7 @@ import { DateFormatPipe } from "./date-format.pipe";
 
 @NgModule({
     declarations :[  LoadingSpinnerComponent, DateFormatPipe],
-    imports:[CommonModule],
+    imports:[CommonModule,],
     exports:[
         LoadingSpinnerComponent,
         CommonModule,

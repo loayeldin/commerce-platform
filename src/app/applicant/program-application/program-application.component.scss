@@ -8,8 +8,8 @@
 .application
 {
     width: 600px;
-height: 700px;
-
+min-height: 700px;
+padding-bottom: 20px;
 
 background: #FFF;
 box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.25);
@@ -105,3 +105,82 @@ line-height: normal
       width: 40%; /* Default width for larger screens */
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+  
+
+.overlay
+{
+  
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000000000000;
+display: none;
+   background-color: 
+  rgba(127,127,127,.5)
+}
+.overlay-content
+{
+  width: 400px;
+
+  background-color: white;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 10px;
+ 
+   animation-name: expandAnimation;
+  animation-duration: .4s;
+  animation-timing-function: ease;
+}
+@keyframes expandAnimation {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 300px;
+  }
+}
+.thank-you
+{
+  width: 260px;
+  height: 200px;
+
+}
+
+.verify-icon
+{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+border: 4px solid var(--primarygreen-color) ;
+display: none;
+  // background-color: var(--primarygreen-color);
+}
+
+.verify-icon .iconn 
+{
+  color: var(--primarygreen-color);
+  font-size: 40px;
+  display: none;
+  
+}
+.thank-you-header,.thank-you-parag,.thank-you-btn
+{
+  display: none;
+}

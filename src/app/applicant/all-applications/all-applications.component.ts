@@ -33,6 +33,7 @@ export class AllApplicationsComponent {
     this.authService.getCookies()
     this.token =  this.authService.user.value.token
     this.collegeId = this.CookieService.get('collegeId')
+    this.programIndex = 0
     this.getAllPorgrams()
   console.log('sdsd')
   }
@@ -52,8 +53,15 @@ export class AllApplicationsComponent {
      console.log(data)
       this.allPrograms = data
       console.log(this.allPrograms.data.programs)
+
+
+
+
+      this.selectedProgramId = this.allPrograms.data.programs[this.programIndex].id
+      this.getAllApplications(this.selectedProgramId)
+      
       // this.isLoading = false
-     this.isLoading = false
+   
     },
     err=>
     {
@@ -107,6 +115,8 @@ export class AllApplicationsComponent {
 
   onProgramSelectionChange(programIndex:any)
   {
+
+    console.log(programIndex)
     this.isLoading = true
      this.selectedProgramId = this.allPrograms.data.programs[programIndex].id
     console.log(this.selectedProgramId)
