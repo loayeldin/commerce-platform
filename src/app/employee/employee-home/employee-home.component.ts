@@ -16,8 +16,8 @@ export class EmployeeHomeComponent implements OnInit{
   deploms!: any;
   constructor(private  http:HttpClient,private authService:AuthService,private router:Router,private CookieService:CookieService, private route: ActivatedRoute){}
   ngOnInit(): void {
-    this.authService.getCookies()
-    this.collegeId = this.CookieService.get('collegeId')
+  
+    this.collegeId = localStorage.getItem('collegeId')
     this.token =this.authService.user.value.token
  
      this.showDeploms()

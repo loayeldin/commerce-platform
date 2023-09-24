@@ -27,8 +27,8 @@ export class StudentReqDataComponent {
       
     })
   ngOnInit(): void {
-    this.authService.getCookies()
-    this.collegeId = this.CookieService.get('collegeId')
+  
+    this.collegeId = localStorage.getItem('collegeId')
     this.token =this.authService.user.value.token
     this.showapplication()
     
@@ -52,8 +52,8 @@ export class StudentReqDataComponent {
 
       this.updateAppForm.patchValue({
         status: this.applicationData.data.application.status,
-        program_fees_status : this.applicationData.data.application.program_fees_status,
-        applying_fees_status : this.applicationData.data.application.applying_fees_status,
+        program_fees_status : `${this.applicationData.data.application.program_fees_status}`,
+        applying_fees_status : `${this.applicationData.data.application.applying_fees_status}`,
         feedback : this.applicationData.data.application.feedback
       })
       this.err = undefined
@@ -86,7 +86,7 @@ export class StudentReqDataComponent {
     return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications/${appId}`,this.updateAppForm.value, {headers}).subscribe(data=>{
       console.log(data);
       this.showapplication()
-      
+      this.router.navigate(['../'], { relativeTo: this.route });
       this.err = undefined
     },
     err=>{

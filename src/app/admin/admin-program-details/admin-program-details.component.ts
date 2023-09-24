@@ -34,12 +34,12 @@ export class AdminProgramDetailsComponent {
   ngOnInit()
   {
 
-    this.authService.getCookies()
+  
   this.token = this.authService.user.value.token
 
      this.programId = this.route.snapshot.paramMap.get('id');
      console.log(this.programId)
-     this.collegeId =this.CookieService.get('collegeId')
+     this.collegeId = localStorage.getItem('collegeId')
 
      console.log(this.programId,this.collegeId)
       this.showProgramDetails()

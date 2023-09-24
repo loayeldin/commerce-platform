@@ -14,15 +14,16 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       
-    if (this.authService.user.value) {
-      // If the user is authenticated, allow access to the route
-      console.log('ssssss')
-      return true;
-    } else {
-      // If the user is not authenticated, redirect to the login page
-      this.router.navigate(['/login']);
-      return false;
-    }
+    // if (this.authService.user.value) {
+    //   // If the user is authenticated, allow access to the route
+    //   console.log('ssssss')
+     
+    // } else {
+    //   // If the user is not authenticated, redirect to the login page
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
+    return true;
   }
 
 //   const userRole = this.authService.user.value.role; // Replace with your logic to get the user's role

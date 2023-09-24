@@ -25,7 +25,7 @@ profileEmployeeData!:any
    ngOnInit()
    {
     // this.getMyProfile()
-    this.authService.getCookies()
+    // this.authService.getCookies()
 
  
     this.userRole = this.authService.user.value.role

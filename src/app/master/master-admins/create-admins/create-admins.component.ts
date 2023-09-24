@@ -45,7 +45,7 @@ export class CreateAdminsComponent {
 
   constructor(private masterService:MasterService,private http:HttpClient,private authService:AuthService,private router:Router, private route: ActivatedRoute){}
   ngOnInit(): void {
-   this.authService.getCookies()
+  //  this.authService.getCookies()
    this.token =this.authService.user.value.token
 
     this.showAdmin()
@@ -209,7 +209,7 @@ export class CreateAdminsComponent {
       console.log(filledFormValues)
 
 
-    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,this.updateAdminForm.value,{headers}).subscribe(data=>
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/master/collages/${this.collageId}/admins/${this.editAdmin.id}`,filledFormValues,{headers}).subscribe(data=>
     {
       console.log(data)
       $('#updateAdmin').modal('hide')

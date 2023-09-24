@@ -30,9 +30,9 @@ export class AllApplicationsComponent {
   ngOnInit()
   {
 
-    this.authService.getCookies()
+
     this.token =  this.authService.user.value.token
-    this.collegeId = this.CookieService.get('collegeId')
+    this.collegeId = localStorage.getItem('collegeId')
     this.programIndex = 0
     this.getAllPorgrams()
   console.log('sdsd')

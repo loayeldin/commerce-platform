@@ -24,10 +24,10 @@ programFiles!:any
 userRole!:any
   ngOnInit()
   {
-    this.authService.getCookies()
+    
     this.programId = this.route.snapshot.paramMap.get('id')
     this.token = this.authService.user.value.token
-    this.collegeId = this.CookieService.get('collegeId')
+    this.collegeId = localStorage.getItem('collegeId')
     console.log(this.programId)
     this.userRole  = this.authService.user.value.role
     this.getProgramDetails()

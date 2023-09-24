@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared.module";
 import { DeplomsComponent } from "./deploms/deploms.component";
@@ -11,6 +11,7 @@ import { EmployeeRoutingModule } from "./employee-routing.module";
 import { EmployeeComponent } from "./employee.component";
 import { HttpClientModule } from "@angular/common/http";
 
+
 @NgModule({
     declarations:[
        
@@ -18,8 +19,8 @@ import { HttpClientModule } from "@angular/common/http";
         DeplomsComponent,
         ShowStudentsComponent,
         EmployeeComponent,
-    
         StudentReqDataComponent,
+   
         
     ],
     imports:[
@@ -28,7 +29,9 @@ import { HttpClientModule } from "@angular/common/http";
         ReactiveFormsModule,
         EmployeeRoutingModule,
         SharedModule,
+        FormsModule,
         HttpClientModule,
+   
     ]
 })
 export class EmployeeModule{}

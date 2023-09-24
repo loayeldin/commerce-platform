@@ -75,8 +75,8 @@ export class AdminEmployeeComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.authService.getCookies()
-    this.collegeId = this.CookieService.get('collegeId')
+   
+    this.collegeId = localStorage.getItem('collegeId')
     this.showEmployee()
     
   }
@@ -157,7 +157,13 @@ export class AdminEmployeeComponent implements OnInit{
 
     const SelectEmployeId = this.employeeData.data.employees[this.UpdatEmployeeIndex].id
       console.log(this.addEmployee.value)
-    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees/${SelectEmployeId}`,this.updateEmployeeForm.value,{headers}).subscribe(data=>
+
+    // Filter out the form controls with null values
+      const filledFormValues = Object.entries(this.updateEmployeeForm.value)
+      .filter(([key, value]) => value !== null)
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+      console.log(filledFormValues)
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees/${SelectEmployeId}`,filledFormValues,{headers}).subscribe(data=>
     {
       console.log(data)
     

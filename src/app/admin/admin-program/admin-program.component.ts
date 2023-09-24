@@ -118,8 +118,9 @@ export class AdminProgramComponent {
   ngOnInit()
   {
     // this.getCollegeId()
-  this.authService.getCookies()
-    this.collegeId = this.CookieService.get('collegeId')
+  // this.authService.getCookies()
+    // this.collegeId = this.CookieService.get('collegeId')
+    this.collegeId = localStorage.getItem('collegeId')
     this.showPrograms()
     console.log(this.programUpdateIndex)
   }

@@ -43,10 +43,10 @@ buttonLabel: string = 'ارسال';
   allUpload=false
 ngOnInit()
 {
-  this.authService.getCookies()
+  
   this.programId = this.route.snapshot.paramMap.get('id')
   this.token = this.authService.user.value.token
-  this.collegeId = this.CookieService.get('collegeId')
+  this.collegeId = localStorage.getItem('collegeId')
   this.getprogramFiles()
 }
 

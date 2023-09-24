@@ -1,13 +1,13 @@
-.students-list
-{
-  // min-height: 100vh; /*  to solve the hiden content under footer*/
 
-}
 .mycontainer
 {
     width: 90%;
     margin: auto;
 
+}
+.student-container h5
+{
+  font-size: 22px;
 }
 header h4
 {
@@ -74,8 +74,30 @@ height: 32px;
   font-size: 30px;
 }
 
+.filter
+{
+ 
+  width: 50%;
+}
+.filter h5
+{
+  color: var(--primary-blue, #1778C2);
+  font-size: 26px;
+}
+.filter option, .filter option:checked
+{
+  font-size: 20px !important;
+}
 
+.filter select 
+{
+  font-size: 23px !important;
+}
 
+.pdfContainer
+{
+ 
+}
 /* Styles for screen sizes up to 768px */
 @media (max-width: 768px) {
     .mycontainer {
@@ -143,7 +165,7 @@ height: 32px;
     header
     {
         padding: 10px;
-        flex-wrap: wrap;
+        flex-wrap: wrap !important;
     }
     header h4 {
       font-size: 24px; /* Decrease the font size for smaller screens */

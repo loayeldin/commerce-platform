@@ -72,7 +72,7 @@
                 <div class="rectangle-diploma-shape">
                     <h5>{{application.program_name}}</h5>
                 
-                    <div class="date mt-4">الحاله: {{application.status}} </div>
+                    <div class="date mt-4">الحاله: {{application.status | statusText}} </div>
                     <!-- <div class="price mt-2">  تم انشاء الطلب في :{{application.created_at}} </div>
 
                      <div class="date mt-3">   تم تحديث الطلب في: {{application.updated_at}}</div> -->
@@ -141,7 +141,7 @@
                     <header class="col-lg-3  "> الحاله</header>
                     
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" [value]="selectedAppDetials.data.application.status"  disabled >
+                        <input type="text" class="form-control" [value]="selectedAppDetials.data.application.status | statusText"  disabled >
 
                        
                     </div>
@@ -156,7 +156,7 @@
                     
                     <div class="col-lg-5">
                        
-                            <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.applying_fees_status" disabled>
+                            <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.applying_fees_status ? 'تم دفع الرسوم' : 'لم يتم الدفع'" disabled>
                        
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                     
                     <div class="col-lg-5">
                        
-                            <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.program_fees_status"disabled >
+                            <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.program_fees_status ? 'تم دفع الرسوم' : 'لم يتم الدفع'"disabled >
                        
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                             <!-- <input type="text" class="form-control"   [value]="selectedAppDetials.data.application.feedback" disabled > -->
 
 
-                            <textarea name="" id="" cols="55" rows="6" disabled [value]="selectedAppDetials.data.application.feedback">
+                            <textarea name="" id="" cols="40" rows="6" disabled [value]="selectedAppDetials.data.application.feedback">
 
                             </textarea>
                        

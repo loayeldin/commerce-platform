@@ -13,6 +13,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { SharedModule } from './shared.module';
 import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { StatusTextPipe } from './status-text.pipe';
 
 
 
@@ -54,13 +55,13 @@ import { HttpClientModule } from '@angular/common/http';
    
 
     HttpClientModule,
-  
-
+   
+   
     SharedModule,
 
  
   ],
-  providers: [CookieService,AuthService],
+  providers: [AuthService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

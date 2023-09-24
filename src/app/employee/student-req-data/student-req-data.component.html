@@ -10,7 +10,7 @@
         <div class="data-content mt-4"  *ngIf="applicationData">
 
             <div class="row d-flex align-items-center">
-                <header class="col-lg-2 col-md-3">الاسم بالكامل: </header>
+                <header class="col-lg-3 col-md-3">الاسم بالكامل: </header>
                 
                 <div class="col-md-8">
                     <div class="input-container ">
@@ -26,7 +26,7 @@
 
 
             <div class="row d-flex align-items-center mt-4" *ngFor="let file of applicationData.data.files">
-                <header class="col-lg-2 col-md-3">{{file.original_name}} : </header>
+                <header class="col-lg-3 col-md-3">{{file.original_name}} : </header>
                 <div class="col-md-8">
                     <div class="input-container">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -43,16 +43,16 @@
             
                <form [formGroup]="updateAppForm" (ngSubmit)="updateApplication()">
                 <div class="row d-flex align-items-center mt-4">
-                    <header class="col-lg-2 col-md-3">مراجعه الطلب:</header>
+                    <header class="col-lg-3 col-md-3">مراجعه الطلب:</header>
                     <div class="col-md-8">
                       
                         <select formControlName="status" class="input-container">
-                            <option disabled selected [value]="applicationData.data.application.status">{{applicationData.data.application.status}}</option>
-                            <option *ngIf="applicationData.data.application.status !=='pending'" value="pending">pending</option>
-                            <option *ngIf="applicationData.data.application.status !=='reviewed'" value="reviewed">reviewed</option>
-                          <option *ngIf="applicationData.data.application.status !== 'first acceptance'" value="first acceptance">first acceptance</option>
+                            <option disabled selected [value]="applicationData.data.application.status">{{applicationData.data.application.status | statusText}}</option>
+                            <option *ngIf="applicationData.data.application.status !=='pending'" value="pending">قيد الانتظار</option>
+                            <option *ngIf="applicationData.data.application.status !=='reviewed'" value="reviewed">تم مراجعة الطلب</option>
+                          <option *ngIf="applicationData.data.application.status !== 'first acceptance'" value="first acceptance">تم الموافقه مبدئياً </option>
                           
-                          <option *ngIf="applicationData.data.application.status !== 'final acceptance'" value="final acceptance">final acceptance</option>
+                          <option *ngIf="applicationData.data.application.status !== 'final acceptance'" value="final acceptance">تم الموافقه النهائيه </option>
                         </select>
                       
                     </div>
@@ -62,13 +62,13 @@
     
     
                 <div class="row d-flex align-items-center mt-4">
-                    <header class="col-lg-2 col-md-3"> حاله دفع رسوم الدبلومه:</header>
+                    <header class="col-lg-3 col-md-3"> حاله دفع رسوم الدبلومه:</header>
                     <div class="col-md-8">
                         
                             <select class="text-style w-100" class="input-container"  name="feesStatusSelector" formControlName="program_fees_status">
-                                <option  disabled selected [value]="applicationData.data.application.program_fees_status">{{applicationData.data.application.program_fees_status}}</option>
-                                <option  *ngIf="applicationData.data.application.program_fees_status != true" value="true">true</option>
-                                <option  *ngIf="applicationData.data.application.program_fees_status != false" value="false">false</option>
+                                <option  disabled selected [value]="applicationData.data.application.program_fees_status">{{applicationData.data.application.program_fees_status ? 'تم دفع الرسوم' : 'لم يتم دفع الرسوم'}}</option>
+                                <option  *ngIf="applicationData.data.application.program_fees_status != true" value="true">تم دفع الرسوم</option>
+                                <option  *ngIf="applicationData.data.application.program_fees_status != false" value="false">لم يتم دفع الرسوم</option>
                             </select>
                         
                     </div>
@@ -79,13 +79,13 @@
     
     
                 <div class="row d-flex align-items-center mt-4">
-                    <header class="col-lg-2 col-md-3">حاله دفع رسوم التقديم:</header>
+                    <header class="col-lg-3 col-md-3">حاله دفع رسوم التقديم:</header>
                     <div class="col-md-8">
                         
                             <select class="text-style w-100" class="input-container" name="feesStatusSelector" formControlName="applying_fees_status">
-                                <option  disabled selected [value]="applicationData.data.application.applying_fees_status">{{applicationData.data.application.applying_fees_status}}</option>
-                                <option  *ngIf="applicationData.data.application.applying_fees_status != true" value="true">true</option>
-                                <option  *ngIf="applicationData.data.application.applying_fees_status != false" value="false">false</option>
+                                <option  disabled selected [value]="applicationData.data.application.applying_fees_status">{{applicationData.data.application.applying_fees_status ? 'تم دفع الرسوم' : 'لم يتم دفع الرسوم'}}</option>
+                                <option  *ngIf="applicationData.data.application.applying_fees_status != true" value="true">تم دفع الرسوم</option>
+                                <option  *ngIf="applicationData.data.application.applying_fees_status != false" value="false">لم يتم دفع الرسوم</option>
                             </select>
                        
                     </div>
@@ -96,9 +96,9 @@
     
     
                 <div class="row d-flex align-items-center mt-4">
-                    <header class="col-lg-2 col-md-3">   ملاحظات :</header>
+                    <header class="col-lg-3 col-md-3">   ملاحظات :</header>
                     <div class="col-md-8">
-                        <textarea name="" id="" cols="60" rows="6" formControlName="feedback">{{applicationData.data.application.feedback}}</textarea>
+                        <textarea name="" id="" cols="50" rows="6" formControlName="feedback">{{applicationData.data.application.feedback}}</textarea>
     
                     </div>
                 </div>

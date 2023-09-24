@@ -1,28 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { EmployeeService } from '../employee.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/auth.service';
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-show-students',
   templateUrl: './show-students.component.html',
   styleUrls: ['./show-students.component.scss']
 })
 export class ShowStudentsComponent {
-
+  @ViewChild('content') content!: ElementRef; 
   token!: any;
   err!: any;
   collegeId!: any;
   deplomsData!: any;
   applicationsData!: any;
+  programIndex=''
   constructor(private employeeService:EmployeeService,private  http:HttpClient,private authService:AuthService,private router:Router,private CookieService:CookieService, private route: ActivatedRoute){}
  
   ngOnInit(): void {
-    this.authService.getCookies()
-    this.collegeId = this.CookieService.get('collegeId')
+  
+    this.collegeId = localStorage.getItem('collegeId')
     this.token =this.authService.user.value.token
-    this.showapplications()
+    this.showapplications(this.programIndex)
     this.showDeplomsData()
      
    }
@@ -49,14 +55,14 @@ export class ShowStudentsComponent {
   //   this.router.navigate(['/employee/showStudents', studentId]);
   // }
 
-  showapplications(){
+  showapplications(programIndex:any){
     const headers = new HttpHeaders({
       'Authorization' : `Bearer ${this.token}`
     })
     
     const programsId =  this.route.snapshot.paramMap.get('id')
     console.log(this.collegeId,programsId)
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications`, {headers}).subscribe(data=>{
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications?applicationStatusFilter=${programIndex}`, {headers}).subscribe(data=>{
       console.log(data);
       
       this.applicationsData = data
@@ -104,4 +110,40 @@ export class ShowStudentsComponent {
     }
     )
   }
+
+
+
+
+  onfilterSelectionChange(programIndex:any)
+  {
+
+    console.log(programIndex)
+    this.showapplications(programIndex)
+  
+  }
+
+  public SavePDF(): void {
+    const content = this.content.nativeElement;
+
+    // Use html2canvas to capture the content as an image
+    html2canvas(content).then((canvas) => {
+      // Create a new jsPDF instance
+      const doc = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'a4'
+      });
+
+      // Calculate the height of the content in PDF units (mm)
+      const pdfHeight = (canvas.height * 210) / canvas.width;
+
+      // Add the image to the PDF
+      doc.addImage(canvas.toDataURL('image/jpeg'), 'JPEG', 0, 0, 210, pdfHeight);
+
+      // Save the PDF with a specified name
+      doc.save('test.pdf');
+    });
+  }
+
+
 }

@@ -118,28 +118,50 @@ export class AuthService {
       this.CookieService.set('collegeId',collegeId)
     }
     
-    this.getCookies()
+    // this.getCookies()
 
 
   
+  }
+
+
+  autoLogin()
+  {
+
+   
+    let checkToken = localStorage.getItem('token')
+    let userId=localStorage.getItem('id')
+    let userRole = localStorage.getItem('role')
+    let userName = localStorage.getItem('name')
+    console.log(checkToken,userId);
+    
+    if (!checkToken || !userId || !userRole || !userName) {
+      return  this.logOut(); // Return or handle the case when user information is not available
+    }
+
+    const newUser = new User(userId,checkToken,userRole,userName)
+    this.user.next(newUser)
+    
   }
 
   getCookies()
   {
 
     
-    if(this.CookieService.check('token'))
+    if(this.CookieService.check('token')  )
     {
-      console.log('yes')
+      console.log(' from get coookies',this.user.value,Object.keys(this.user.getValue()).length);
       const newUser = new User(this.CookieService.get('id'),this.CookieService.get('token'),this.CookieService.get('role'),this.CookieService.get('name'))
       this.user.next(newUser)
     
+      
       console.log(this.user.value)
     }
     else
     {
       console.log('no')
-      this.router.navigate(['/login'])
+      this.logOut()
+    
     }
   
 
@@ -148,41 +170,36 @@ export class AuthService {
 
   deleteCookies()
   {
-    this.CookieService.deleteAll()
+    
     // this.loggedIn.next(false)
+
+    // this.router.navigate(['/login'])
+    // this.loggedIn.next(false)
+    this.CookieService.deleteAll()
   }
 
 
 
-  logOut()
-  {
-    this.deleteCookies()
-    this.user.next(<User>({}))
+   logOut() {
+   
+    
+      // this.user.next(<User>({}));
+      // console.log(this.CookieService.get('id'),this.CookieService.get('token'),this.CookieService.get('role'),this.CookieService.get('name'));
+      // console.log(this.user.value);
+      // this.CookieService.deleteAll();
+      // this.router.navigate(['/login']);
+      // this.loggedIn.next(false);
   
-    this.router.navigate(['/login'])
-    this.loggedIn.next(false)
-  
+      this.user.next(<User>({}));
+      localStorage.clear();
+      this.router.navigate(['/login']);
+   
   }
  
 
 
 
-  // startAutoLogout(minutes: number): void {
-  //   const expirationTime = this.CookieService.get('expiration');
-  
-  //   if (!expirationTime || new Date().getTime() > +expirationTime) {
-  //     // Calculate the new expiration time
-  //     const newExpirationTime = new Date().getTime() + minutes * 60 * 1000;
-  //     this.CookieService.set('expiration', newExpirationTime.toString());
-  
-  //     this.tokenExpirationTimer = setTimeout(() => {
-  //       // Implement your logout logic here
-  //       console.log('logouted')
-  //     }, minutes * 60 * 1000); // Convert minutes to milliseconds
 
-  //     console.log(this.tokenExpirationTimer)
-  //   }
-  // }
 
   getMyProfile(token:any,userRole:any,userId:any)
   {
@@ -207,12 +224,28 @@ export class AuthService {
   
         
   
-       this.setCookies(token,userId,userRole,this.userName,null) // no need to fourth paramter there
+      //  this.setCookies(token,userId,userRole,this.userName,null) // no need to fourth paramter there
        
-       console.log(this.user.value)
+
+
    
         this.loggedIn.next(true)
+
+
+
+
+
+        localStorage.setItem('id', userId);
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', userRole);
+        localStorage.setItem('name', this.userName);
       
+    
+
+
+
+
+
         this.router.navigate(['/master'])
 
 
@@ -229,7 +262,15 @@ export class AuthService {
   
        
       const collegeId= this.adminProfile.data.adminData.collage_id
-       this.setCookies(token,userId,userRole,this.userName,collegeId)
+      //  this.setCookies(token,userId,userRole,this.userName,collegeId)
+
+
+      localStorage.setItem('id', userId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', userRole);
+      localStorage.setItem('name', this.userName);
+    
+      localStorage.setItem('collegeId',collegeId)
        console.log(this.user.value)
    
         this.loggedIn.next(true)
@@ -253,7 +294,15 @@ export class AuthService {
         console.log(collegeId)
 
       // const collegeId= this.applicantProfile.data.adminData.collage_id
-       this.setCookies(token,userId,userRole,this.userName,collegeId)
+      //  this.setCookies(token,userId,userRole,this.userName,collegeId)
+
+      localStorage.setItem('id', userId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', userRole);
+      localStorage.setItem('name', this.userName);
+      localStorage.setItem('collegeId',collegeId)
+
+
        console.log(this.user.value)
    
         this.loggedIn.next(true)
@@ -275,7 +324,13 @@ export class AuthService {
         console.log(collegeId)
 
       // const collegeId= this.applicantProfile.data.adminData.collage_id
-       this.setCookies(token,userId,userRole,this.userName,collegeId)
+      //  this.setCookies(token,userId,userRole,this.userName,collegeId)
+
+      localStorage.setItem('id', userId);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', userRole);
+      localStorage.setItem('name', this.userName);
+      localStorage.setItem('collegeId',collegeId)
 
        console.log(this.user.value)
    

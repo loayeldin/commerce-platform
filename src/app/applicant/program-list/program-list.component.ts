@@ -19,8 +19,8 @@ token!:any
   constructor(private appService:ApplicantServiceService , private router:Router,private authService:AuthService,private http:HttpClient,private CookieService:CookieService){}
   ngOnInit()
   {
-    this.authService.getCookies()
-   this.collegeId= this.CookieService.get('collegeId')
+    // this.authService.getCookies()
+    this.collegeId = localStorage.getItem('collegeId')
     this.token = this.authService.user.value.token
     this.getAllPrograms()
     // this.programList = this.appService.programList
