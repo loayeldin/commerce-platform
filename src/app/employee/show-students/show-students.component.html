@@ -14,39 +14,284 @@
             <div class="program-header d-flex justify-content-start align-items-center">
                 <img src="../../../assets/applicant/Vector.svg" alt="">
                 <h4 class="pt-1">{{deplomsData.data.program.name}}</h4>
-            </div>        
-            
-            
-           
-              
-               
-
-            <div class="filter">
-                <h5 class="col-lg-3  choose mt-2">  فلتر حسب</h5>
-                <select id="program"
-                class="form-control w-75 mt-2"
-                
-                name="selectProgram" 
-                required
-                [(ngModel)]="programIndex"
-
-                (ngModelChange)="onfilterSelectionChange($event)"
-                #selectProgram
-                >
-
-                <option value="" >الكل</option>
-                <option value="pending"   >{{ 'pending' | statusText }}</option>
-                <option value="reviewed"  >{{ 'reviewed' | statusText }}</option>
-                <option value="first acceptance"  >{{ 'first acceptance' | statusText }}</option>
-                <option value="final acceptance"  >{{ 'final acceptance' | statusText }}</option>
-            </select>
             </div>
-           
-         
+            <div class="" *ngIf="applicationsData" style="z-index: 1000;">  
 
-
-
+   
+              <div class="text-center mb-4">
+                <div class="shows" (click)="showSheet()">
+                  <button class="custom-button">قائمة الطلاب {{ programIndex | statusText }}</button>
+                </div>
+              </div>
+              
+              <div class="bottom-sheet" [ngClass]="{'show': isSheetVisible, 'fullscreen': isFullscreen}" #sheet>
+                <div class="sheet-overlay" (click)="remove()" *ngIf="isSheetVisible"></div>
+              
+                <div class="content" [style.height.%]="sheetHeight" #contents>
+                  <div class="header">
+                    <div class="drag-icon" (mousedown)="dragStart($event)" (touchstart)="dragStart($event)" (mousemove)="dragging($event)" (touchmove)="dragging($event)" (mouseup)="dragStop()" (touchend)="dragStop()" *ngIf="isSheetVisible"><span></span></div>
+                  </div>
+                  <div class="body">
+                    
+                    <input type="button" value="Download PDF" class="btn btn-success" (click)="SavePDF()"> 
+                      <br/><br/>  
+                      <div class="pdfContainer" id="content" #content> 
+                
+                        <table class="table table-bordered ">  
+                          <!-- Add your title here -->
+                  
+                            <tr>  
+                                <th>اسم الطالب</th>  
+                                <th>الرقم القومي</th>  
+                                <th>الحاله</th>
+                                
+                            </tr>  
+                            <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                                <th>{{ application.applicant_name}}</th>  
+                                <th>{{application.national_id}}</th>  
+                                <th>{{application.status | statusText}}</th>
+                                 
+                            </tr>  
+                            <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                              <th>{{ application.applicant_name}}</th>  
+                              <th>{{application.national_id}}</th>  
+                              <th>{{application.status | statusText}}</th>
+                               
+                          </tr>  
+                          <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                            <th>{{ application.applicant_name}}</th>  
+                            <th>{{application.national_id}}</th>  
+                            <th>{{application.status | statusText}}</th>
+                             
+                        </tr>  
+                        <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                          <th>{{ application.applicant_name}}</th>  
+                          <th>{{application.national_id}}</th>  
+                          <th>{{application.status | statusText}}</th>
+                           
+                      </tr>  
+                      <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                        <th>{{ application.applicant_name}}</th>  
+                        <th>{{application.national_id}}</th>  
+                        <th>{{application.status | statusText}}</th>
+                         
+                    </tr>  
+                    <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                      <th>{{ application.applicant_name}}</th>  
+                      <th>{{application.national_id}}</th>  
+                      <th>{{application.status | statusText}}</th>
+                       
+                  </tr>  
+                  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
+                    <th>{{ application.applicant_name}}</th>  
+                    <th>{{application.national_id}}</th>  
+                    <th>{{application.status | statusText}}</th>
+                     
+                  </tr>  
+                        </table>  
+                    </div>  
+            
+                    </div>
+                  </div>
+                </div>
+              
+              
+            
+            
+              
+            </div>          
         </header>
+
+        <div class="filter">
+          <h5 class="col-lg-3  choose mt-2">  فلتر حسب</h5>
+          <select id="program"
+          class="form-control w-75 mt-2"
+          
+          name="selectProgram" 
+          required
+          [(ngModel)]="programIndex"
+
+          (ngModelChange)="onfilterSelectionChange($event)"
+          #selectProgram
+          >
+
+          <option value="" >الكل</option>
+          <option value="pending"   >{{ 'pending' | statusText }}</option>
+          <option value="reviewed"  >{{ 'reviewed' | statusText }}</option>
+          <option value="first acceptance"  >{{ 'first acceptance' | statusText }}</option>
+          <option value="final acceptance"  >{{ 'final acceptance' | statusText }}</option>
+      </select>
+      </div>
 
         
 
@@ -91,236 +336,3 @@
 
 
  
-<div class="container" *ngIf="applicationsData" >  
-
-  <input type="button" value="Download PDF" class="btn btn-success" (click)="SavePDF()"> 
-  <br/><br/>  
-  
-  <div class="pdfContainer" id="content" #content> 
-    <div class="text-center mb-4">
-      <h3>  قائمه طلاب {{programIndex | statusText}}  </h3> 
-    </div>
-      <table class="table table-bordered ">  
-        <!-- Add your title here -->
-
-          <tr>  
-              <th>اسم الطالب</th>  
-              <th>الرقم القومي</th>  
-              <th>الحاله</th>
-              
-          </tr>  
-          <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-              <th>{{ application.applicant_name}}</th>  
-              <th>{{application.national_id}}</th>  
-              <th>{{application.status | statusText}}</th>
-               
-          </tr>  
-          <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-            <th>{{ application.applicant_name}}</th>  
-            <th>{{application.national_id}}</th>  
-            <th>{{application.status | statusText}}</th>
-             
-        </tr>  
-        <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-          <th>{{ application.applicant_name}}</th>  
-          <th>{{application.national_id}}</th>  
-          <th>{{application.status | statusText}}</th>
-           
-      </tr>  
-      <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-        <th>{{ application.applicant_name}}</th>  
-        <th>{{application.national_id}}</th>  
-        <th>{{application.status | statusText}}</th>
-         
-    </tr>  
-    <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-      <th>{{ application.applicant_name}}</th>  
-      <th>{{application.national_id}}</th>  
-      <th>{{application.status | statusText}}</th>
-       
-  </tr>  
-  <tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-    <th>{{ application.applicant_name}}</th>  
-    <th>{{application.national_id}}</th>  
-    <th>{{application.status | statusText}}</th>
-     
-</tr>  
-
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-<tr *ngFor="let application of applicationsData.data.applications; let i = index" >  
-  <th>{{ application.applicant_name}}</th>  
-  <th>{{application.national_id}}</th>  
-  <th>{{application.status | statusText}}</th>
-   
-</tr>  
-      </table>  
-  </div>  
-</div>  
