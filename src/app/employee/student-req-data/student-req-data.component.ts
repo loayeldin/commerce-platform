@@ -23,7 +23,7 @@ export class StudentReqDataComponent {
       status : new FormControl(),
       program_fees_status : new FormControl(),
       applying_fees_status: new FormControl(),
-      feedback:new FormControl()
+      feedback:new FormControl(null)
       
     })
   ngOnInit(): void {
@@ -83,7 +83,20 @@ export class StudentReqDataComponent {
     console.log(this.updateAppForm.value);
     
     const programsId =  this.route.snapshot.paramMap.get('id')
-    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications/${appId}`,this.updateAppForm.value, {headers}).subscribe(data=>{
+
+    const filteredFormValues = Object.entries(this.updateAppForm.value)
+  .filter(([key, value]) => value !== null && value !== "")
+  .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+  console.log(filteredFormValues);
+  
+    // // Filter out the form controls with null values
+    // const filledFormValues = Object.entries(this.updateAppForm.value)
+    // .filter(([key, value]) => value !== null || value !== "")
+    // .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    // console.log(filledFormValues)
+
+
+    return this.http.patch(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications/${appId}`,filteredFormValues, {headers}).subscribe(data=>{
       console.log(data);
       this.showapplication()
       this.router.navigate(['../'], { relativeTo: this.route });
