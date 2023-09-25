@@ -32,7 +32,7 @@ export class AdminEmployeeComponent implements OnInit{
   pages: number[] = []; // Define the pages array in your component class
 
   currentPage: number = 1; // Current page
-pageLimit: number = 10;  // Number of items per page
+pageLimit: number = 12;  // Number of items per page
 totalItems: number = 0; // Total number of items (you'll update this value with the response)
 totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
 
@@ -138,7 +138,8 @@ totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
     
     
     this.employeeData = data
-
+      console.log(this.employeeData);
+      
     this.totalItems = this.employeeData.data.count; // Update the total number of items
     console.log(this.totalItems);
 

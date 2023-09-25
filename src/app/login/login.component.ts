@@ -16,7 +16,7 @@ roleErr!:any
   isLoading=true
   login = new FormGroup(
     {
-      role: new FormControl('master',[Validators.required]),
+      role: new FormControl('applicant',[Validators.required]),
       email: new FormControl('',Validators.required),
       password: new FormControl('',[Validators.required])
     })

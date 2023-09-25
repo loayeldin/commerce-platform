@@ -160,6 +160,62 @@ totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
   }
 
 
+  
+  // public SavePDF(): void {
+  //   // Select the table element
+  //   const table = this.content.nativeElement.querySelector('table');
+  
+  //   // Calculate the total number of rows in the table
+  //   const rows = Array.from(table.querySelectorAll('tr'));
+  //   const totalRows = rows.length - 1; // Subtract 1 for the header row
+  
+  //   const rowsPerPage = 5; // Number of rows per page
+  
+  //   // Use html2canvas to capture the content as an image
+  //   html2canvas(table).then((canvas) => {
+  //     // Create a new jsPDF instance
+  //     const doc = new jsPDF({
+  //       orientation: 'p',
+  //       unit: 'mm',
+  //       format: 'a4'
+  //     });
+  
+  //     let startY = 0;
+  //     let currentPage = 1;
+  
+  //     // Loop through each batch of rows (5 rows per page)
+  //     for (let startRow = 0; startRow < totalRows; startRow += rowsPerPage) {
+  //       // Calculate the end row for the current page
+  //       const endRow = Math.min(startRow + rowsPerPage, totalRows);
+  
+  //       // Calculate the height of the content in PDF units (mm) for this page
+  //       const pdfHeight = (canvas.height * 210) / canvas.width;
+  
+  //       // Add the image to the PDF for the current batch of rows
+  //       doc.addImage(
+  //         canvas.toDataURL('image/jpeg'),
+  //         'JPEG',
+  //         0,
+  //         -startY, // Adjust for the position on the page
+  //         210,
+  //         pdfHeight
+  //       );
+  
+  //       // If there are more rows, add a new page
+  //       if (endRow < totalRows) {
+  //         doc.addPage();
+  //         currentPage++;
+  //       }
+  
+  //       startY += pdfHeight;
+  //     }
+  
+  //     // Save the PDF with a specified name
+  //     doc.save('test.pdf');
+  //   });
+  // }
+  
+  
 
 
   public SavePDF(): void {

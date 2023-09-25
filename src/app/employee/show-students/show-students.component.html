@@ -9,7 +9,7 @@
 
 
 <div class="students-list" *ngIf="applicationsData && deplomsData">
-    <div class="container">
+    <div class="mycontainer">
         <header class="d-flex justify-content-between align-items-center mt-5">
             <div class="program-header d-flex justify-content-start align-items-center">
                 <img src="../../../assets/applicant/Vector.svg" alt="">
@@ -92,14 +92,15 @@
 
           
         <div class="student-container pt-5">
-            <div class="row d-flex justify-content-between" *ngIf="this.applicationsData && deplomsData">
-              <div class="col-md-5" *ngFor="let application of applicationsData.data.applications; let i = index" (click)="studentInfo(i)">
+            <div class="row d-flex justify-content-start" *ngIf="this.applicationsData && deplomsData">
+              <div class="col-md-4" *ngFor="let application of applicationsData.data.applications; let i = index" (click)="studentInfo(i)">
                 <div class="rectangle mt-4 text-center">
 
                   <h4>{{ application.applicant_name}}</h4>
 
                   <div class="mt-3">  <h5>الحاله: {{ application.status | statusText}}</h5></div>
-
+                  <div class="date mt-3">تم الانشاء في : {{application.created_at | dateFormat}}</div>
+                    <div class="price mt-2">تم التحديث في : {{application.updated_at | dateFormat}}</div>
 
                 </div>
               </div>
