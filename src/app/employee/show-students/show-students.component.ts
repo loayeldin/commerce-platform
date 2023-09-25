@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/auth.service';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
+// Correct import statement
 import html2canvas from 'html2canvas';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -22,6 +23,16 @@ export class ShowStudentsComponent {
   deplomsData!: any;
   applicationsData!: any;
   programIndex=''
+
+
+  pages: number[] = []; // Define the pages array in your component class
+
+  currentPage: number = 1; // Current page
+pageLimit: number = 10;  // Number of items per page
+totalItems: number = 0; // Total number of items (you'll update this value with the response)
+totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
+
+
   constructor(private renderer: Renderer2 ,private employeeService:EmployeeService,private  http:HttpClient,private authService:AuthService,private router:Router,private CookieService:CookieService, private route: ActivatedRoute){}
  
   ngOnInit(): void {
@@ -39,33 +50,40 @@ export class ShowStudentsComponent {
     this.router.navigate([`/employee/empHome/${deplomaId}/showStudents/${studentId}`, ]);
    }
 
-  // ngOnInit()
-  // {
-  //   this.applicantStudents =this.employeeService.applicantsStudents
-  //   console.log(this.applicantStudents)
-  // }
+  
 
 
 
-  /** to get stdent info when employee clicked * */
-  // studentInfo(index:number)
-  // {
-  //   console.log(this.applicantStudents[index]) 
-  //   let studentId=this.applicantStudents[index].id
-  //   this.router.navigate(['/employee/showStudents', studentId]);
-  // }
-
-  showapplications(programIndex:any){
+  showapplications(programIndex:any,page:number = 1){
     const headers = new HttpHeaders({
       'Authorization' : `Bearer ${this.token}`
     })
     
     const programsId =  this.route.snapshot.paramMap.get('id')
     console.log(this.collegeId,programsId)
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications?applicationStatusFilter=${programIndex}`, {headers}).subscribe(data=>{
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/employee/collages/${this.collegeId}/programs/${programsId}/applications`,
+     {
+      headers,
+      params:{
+        applicationStatusFilter: programIndex,
+        limit: this.pageLimit.toString(),
+        page:page
+
+      }
+    
+    
+    }).subscribe(data=>{
       console.log(data);
       
       this.applicationsData = data
+      this.totalItems = this.applicationsData.data.totalApplications.count; // Update the total number of items
+      console.log(this.totalItems);
+
+       // Recalculate totalPages based on the updated totalItems
+    this.totalPages = Math.ceil(this.totalItems / this.pageLimit);
+
+    this.updatePages();
+      
       this.err = undefined
     },
     err=>{
@@ -121,6 +139,28 @@ export class ShowStudentsComponent {
     this.showapplications(programIndex)
   
   }
+
+  // Create a function to handle page changes:
+  onPageChange(newPage: number): void {
+    if (newPage >= 1 && newPage <= this.totalPages) {
+      this.currentPage = newPage;
+      this.showapplications(this.programIndex, this.currentPage)
+      this.updatePages();
+    }
+  }
+
+
+
+  // Add this function to generate the pages array
+  updatePages(): void {
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
+
+
+
 
   public SavePDF(): void {
     const content = this.content.nativeElement;

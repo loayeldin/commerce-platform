@@ -8,13 +8,13 @@ export class StatusTextPipe implements PipeTransform {
   transform(status: string) :string {
     switch (status) {
       case 'pending':
-        return 'قيد الانتظار';
+        return 'تحت المراجعه';
       case 'reviewed':
-        return 'تم مراجعة الطلب';
+        return '  تمت المراجعه';
       case 'first acceptance':
-        return 'تم الموافقه مبدئياً';
+        return '  قبول مبدئي';
       case 'final acceptance':
-        return ' تم الموافقه النهائيه';
+        return ' قبول نهائي';
       default:
         return ''
     }

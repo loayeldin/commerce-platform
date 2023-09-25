@@ -48,11 +48,11 @@
                       
                         <select formControlName="status" class="input-container">
                             <option disabled selected [value]="applicationData.data.application.status">{{applicationData.data.application.status | statusText}}</option>
-                            <option *ngIf="applicationData.data.application.status !=='pending'" value="pending">قيد الانتظار</option>
-                            <option *ngIf="applicationData.data.application.status !=='reviewed'" value="reviewed">تم مراجعة الطلب</option>
-                          <option *ngIf="applicationData.data.application.status !== 'first acceptance'" value="first acceptance">تم الموافقه مبدئياً </option>
+                            <option *ngIf="applicationData.data.application.status !=='pending'" value="pending"> تحت المراجعه</option>
+                            <option *ngIf="applicationData.data.application.status !=='reviewed'" value="reviewed">تمت المراجعه</option>
+                          <option *ngIf="applicationData.data.application.status !== 'first acceptance'" value="first acceptance">قبول مبدئي   </option>
                           
-                          <option *ngIf="applicationData.data.application.status !== 'final acceptance'" value="final acceptance">تم الموافقه النهائيه </option>
+                          <option *ngIf="applicationData.data.application.status !== 'final acceptance'" value="final acceptance">قبول نهائي</option>
                         </select>
                       
                     </div>

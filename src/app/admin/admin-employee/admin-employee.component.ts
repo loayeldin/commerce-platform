@@ -25,6 +25,22 @@ export class AdminEmployeeComponent implements OnInit{
   adminProfile!:any
   updateEmployee!:any
   err!:any
+
+
+
+
+  pages: number[] = []; // Define the pages array in your component class
+
+  currentPage: number = 1; // Current page
+pageLimit: number = 10;  // Number of items per page
+totalItems: number = 0; // Total number of items (you'll update this value with the response)
+totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
+
+
+
+
+
+
   @ViewChild('editEmployeeSelect') editEmployeeSelect!: ElementRef;
   @ViewChild('removeEmployeeSelect') removeEmployeeSelect!: ElementRef;
 
@@ -101,17 +117,37 @@ export class AdminEmployeeComponent implements OnInit{
     })
   }
 
-  showEmployee(){
+  showEmployee(page:number = 1){
     const headers = new HttpHeaders({
       'Authorization' : `Bearer ${this.token}`
 
     })
     
 
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees`,{headers}).subscribe(data=>{
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/employees`,
+    {
+      headers,
+      params:{
+     
+        limit: this.pageLimit.toString(),
+        page:page
+
+      }
+    
+    }).subscribe(data=>{
     
     
     this.employeeData = data
+
+    this.totalItems = this.employeeData.data.count; // Update the total number of items
+    console.log(this.totalItems);
+
+     // Recalculate totalPages based on the updated totalItems
+  this.totalPages = Math.ceil(this.totalItems / this.pageLimit);
+
+  this.updatePages();
+
+
     console.log(data);
     this.isLoading = false
     },
@@ -140,11 +176,11 @@ export class AdminEmployeeComponent implements OnInit{
     
     this.updateEmployee = this.employeeData.data.employees[SelectedIndex]
     console.log(this.updateEmployee)
-    // this.addEmployee.patchValue({
-    //   name:this.updateEmployee.name,
-    //   email:this.updateEmployee.email,
-    //   password:this.updateEmployee.password
-    // })
+    this.updateEmployeeForm.patchValue({
+      name:this.updateEmployee.name,
+      email:this.updateEmployee.email,
+      // password:this.updateEmployee.password
+    })
     
   }
 
@@ -206,5 +242,30 @@ export class AdminEmployeeComponent implements OnInit{
     })
 
   }
+
+
+
+
+
+
+
+ // Create a function to handle page changes:
+ onPageChange(newPage: number): void {
+  if (newPage >= 1 && newPage <= this.totalPages) {
+    this.currentPage = newPage;
+    this.showEmployee(this.currentPage)
+    this.updatePages();
+  }
+}
+
+
+
+// Add this function to generate the pages array
+updatePages(): void {
+  this.pages = [];
+  for (let i = 1; i <= this.totalPages; i++) {
+    this.pages.push(i);
+  }
+}
 }
 

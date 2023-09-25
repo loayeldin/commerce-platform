@@ -73,6 +73,12 @@
 
                         <a class="dropdown-item myProfile text-right" routerLink="/applicant/MyApplications" *ngIf="userRole == 'applicant'"> الدبلومات السابقه</a>
 
+
+                        <a class="dropdown-item myProfile text-right" routerLink="/admin" *ngIf="userRole == 'admin'">  لوحه التحكم</a>
+                        <a class="dropdown-item myProfile text-right" routerLink="/master" *ngIf="userRole == 'master'">  لوحه التحكم</a>
+
+                        <a class="dropdown-item myProfile text-right" routerLink="/employee" *ngIf="userRole == 'employee'">  لوحه التحكم</a>
+
                         <a class="dropdown-item myProfile text-right" routerLink="/myprofile">معلومات الحساب</a>
                         
                         

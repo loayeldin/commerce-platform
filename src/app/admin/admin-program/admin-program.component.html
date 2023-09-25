@@ -450,6 +450,26 @@
 
 
 
+<!-- Add pagination controls -->
+
+
+
+
+
+
+<nav aria-label="..." class="mt-5">
+  <ul class="pagination justify-content-center mt-3">
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <span class="page-link" (click)="onPageChange(currentPage - 1)">السابق</span>
+    </li>
+    <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+      <a class="page-link"  (click)="onPageChange(page)">{{ page }} <span class="sr-only" *ngIf="page === currentPage">(current)</span></a>
+    </li>
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <span class="page-link" (click)="onPageChange(currentPage + 1)">التالي</span>
+    </li>
+  </ul>
+</nav>
 
 
 

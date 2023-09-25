@@ -39,6 +39,16 @@ export class AdminProgramComponent {
   
 
 
+  
+  pages: number[] = []; // Define the pages array in your component class
+
+  currentPage: number = 1; // Current page
+pageLimit: number = 10;  // Number of items per page
+totalItems: number = 0; // Total number of items (you'll update this value with the response)
+totalPages: number = Math.ceil(this.totalItems / this.pageLimit);
+
+
+
 
   @ViewChild('editProgramSelect') editProgramSelect!: ElementRef;
   @ViewChild('removeProgramSelect') removeProgramSelect!: ElementRef;
@@ -155,7 +165,7 @@ export class AdminProgramComponent {
   
 //  }
 
-  showPrograms()
+  showPrograms(page:number = 1)
   {
     const headers= new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
@@ -163,10 +173,25 @@ export class AdminProgramComponent {
     
     
     
-    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/programs/`,{headers}).subscribe(data=>
+    return this.http.get(`https://commerce-api-dev.onrender.com/api/v1/admin/collages/${this.collegeId}/programs/`,
+    {
+      headers,
+      params:
+      {
+        limit: this.pageLimit.toString(),
+        page:page
+      }
+    }).subscribe(data=>
     {
      
       this.programsData = data
+      this.totalItems = this.programsData.data.count; // Update the total number of items
+      console.log(this.totalItems);
+
+       // Recalculate totalPages based on the updated totalItems
+    this.totalPages = Math.ceil(this.totalItems / this.pageLimit);
+
+    this.updatePages();
       console.log(this.programsData.data.programs)
       this.isLoading = false
      
@@ -345,4 +370,24 @@ openProgramDetails(index:number)
   
     }
 
+
+
+     // Create a function to handle page changes:
+  onPageChange(newPage: number): void {
+    if (newPage >= 1 && newPage <= this.totalPages) {
+      this.currentPage = newPage;
+      this.showPrograms( this.currentPage)
+      this.updatePages();
+    }
+  }
+
+
+
+  // Add this function to generate the pages array
+  updatePages(): void {
+    this.pages = [];
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
+  }
 }

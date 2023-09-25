@@ -119,10 +119,17 @@ line-height: normal;
     color: var(--font-color, #212529);
 text-align: right;
 font-family: Cairo;
-font-size: 16px;
+font-size: 17px;
 font-style: normal;
 font-weight: 500;
+cursor: pointer;
 line-height: normal;
+}
+.dropdown-item
+{
+    padding-bottom: 10px;
+  
+ 
 }
 
 .dropdown-item:hover
@@ -142,13 +149,14 @@ position: relative;
     height: 1px;
     position: absolute;
     color: red;
-    bottom: -3px;
+    bottom: 0px;
     background-color: red;
     left: 4%;
 }
 .dropdown-menu
 {
     top: 140% !important;
+    z-index: 2222222;
 }
 /* end user-info style */
 
